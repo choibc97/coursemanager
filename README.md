@@ -25,3 +25,7 @@ official documentation:
 - vector icons chart: https://oblador.github.io/react-native-vector-icons/
 - react native elements: https://react-native-training.github.io/react-native-elements/docs/getting_started.html
 - native base: https://docs.nativebase.io/
+
+other guides:
+- setting up jenkins with multiple repos: https://www.linkedin.com/pulse/how-setup-single-jenkins-multiple-different-projects-linked-demiris/
+

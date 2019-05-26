@@ -7,7 +7,7 @@ import store from "./store";
 import StudentNavigator from "./components/navigators/StudentNavigator";
 import InstructorNavigator from "./components/navigators/InstructorNavigator";
 
-const AppContainer = createAppContainer(StudentNavigator);
+const AppContainer = createAppContainer(InstructorNavigator);
 
 export default class App extends Component {
   render() {
