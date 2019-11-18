@@ -1,3 +1,7 @@
+migrations
+.vscode
+env
+secrets.py
 
 # Created by https://www.gitignore.io/api/react,django,reactnative
 # Edit at https://www.gitignore.io/?templates=react,django,reactnative
