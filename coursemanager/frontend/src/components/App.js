@@ -12,7 +12,7 @@ import AlertTemplate from "react-alert-template-basic";
 // import PrivateRoute from "./common/PrivateRoute";
 
 import { Provider } from "react-redux";
-// import store from "../store";
+import store from "../store";
 // import { loadUser } from "../actions/auth";
 
 // alert options
