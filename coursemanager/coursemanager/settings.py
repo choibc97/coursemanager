@@ -35,6 +35,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # apps from pip
+    'rest_framework',
+    'knox',
+    'annoying',
+
+    # custom apps
+    'frontend',
 ]
 
 MIDDLEWARE = [
