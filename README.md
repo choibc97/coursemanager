@@ -1,6 +1,7 @@
 # benjaminchoi_masters_project
 
 frameworks used:
+
 - react
 - react-native
 - react-navigation
@@ -16,6 +17,7 @@ frameworks used:
 - native-base
 
 official documentation:
+
 - react native: https://facebook.github.io/react-native/docs/getting-started
 - react navigation: https://reactnavigation.org/docs/en/getting-started.html
 - redux: https://redux.js.org/introduction/getting-started
@@ -27,5 +29,5 @@ official documentation:
 - native base: https://docs.nativebase.io/
 
 other guides:
-- setting up jenkins with multiple repos: https://www.linkedin.com/pulse/how-setup-single-jenkins-multiple-different-projects-linked-demiris/
 
+- multiple user types: <https://simpleisbetterthancomplex.com/tutorial/2018/01/18/how-to-implement-multiple-user-types-with-django.html>

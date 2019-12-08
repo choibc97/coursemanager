@@ -12,6 +12,8 @@ import Login from "./accounts/Login";
 import Register from "./accounts/Register";
 import Profile from "./accounts/Profile";
 
+import Container from "react-bootstrap/Container";
+
 import { Provider } from "react-redux";
 import store from "../store";
 // import { loadUser } from "../actions/auth";
@@ -35,13 +37,13 @@ class App extends Component {
             <Fragment>
               <Header />
               <Alerts />
-              <div className="container">
+              <Container>
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                 </Switch>
-              </div>
+              </Container>
             </Fragment>
           </Router>
         </AlertProvider>
