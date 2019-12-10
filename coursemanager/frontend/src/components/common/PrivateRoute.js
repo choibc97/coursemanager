@@ -14,7 +14,13 @@ const PrivateRoute = ({
       {...rest}
       render={props => {
         if (auth.isLoading) {
-          return <p>Loading...</p>;
+          return (
+            <div className="text-center">
+              <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+              </Spinner>
+            </div>
+          );
         } else if (!auth.isAuthenticated) {
           createMessage({
             privateRouteFail: "You must be logged in to access this page"

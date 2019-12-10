@@ -9,12 +9,35 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+
+import { login } from "../../actions/auth";
 
 export class Login extends Component {
-  static propTypes = {};
+  static propTypes = {
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired
+  };
+
+  state = {
+    username: "",
+    password: ""
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    this.props.login(this.state.username, this.state.password);
+  };
 
   render() {
+    if (this.props.isAuthenticated) {
+      return <Redirect to="/" />;
+    }
+
     return (
       <Container>
         <Row>
@@ -22,14 +45,24 @@ export class Login extends Component {
             <Card className="mt-5">
               <Card.Body>
                 <h2 className="text-center">Login</h2>
-                <Form>
+                <Form onSubmit={this.onSubmit}>
                   <Form.Group>
-                    <Form.Label>Username</Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Label>WUSTL Key</Form.Label>
+                    <Form.Control
+                      type="text"
+                      onChange={this.onChange}
+                      name="username"
+                      value={this.state.username}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" />
+                    <Form.Control
+                      type="password"
+                      onChange={this.onChange}
+                      name="password"
+                      value={this.state.password}
+                    />
                   </Form.Group>
                   <Form.Group>
                     <Button type="submit">Login</Button>
@@ -47,8 +80,10 @@ export class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { login };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -8,9 +8,17 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 
 export class Header extends Component {
-  static propTypes = {};
+  static propTypes = {
+    auth: PropTypes.object.isRequired
+  };
 
   render() {
+    const { isAuthenticated, user } = this.props.auth;
+
+    if (!isAuthenticated) {
+      return null;
+    }
+
     return (
       <Navbar expand="sm">
         <Container>
@@ -34,7 +42,9 @@ export class Header extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
 const mapDispatchToProps = {};
 

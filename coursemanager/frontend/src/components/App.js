@@ -5,18 +5,25 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
+// layout stuff
 import Header from "./layout/Header";
-import PrivateRoute from "./common/PrivateRoute";
 import Alerts from "./layout/Alerts";
+
+// common stuff
+import PrivateRoute from "./common/PrivateRoute";
+
+// home stuff
+import Home from "./home/Home";
+
+// accounts stuff
 import Login from "./accounts/Login";
-import Register from "./accounts/Register";
 import Profile from "./accounts/Profile";
 
 import Container from "react-bootstrap/Container";
 
 import { Provider } from "react-redux";
 import store from "../store";
-// import { loadUser } from "../actions/auth";
+import { loadUser } from "../actions/auth";
 
 // alert options
 const alertOptions = {
@@ -26,7 +33,7 @@ const alertOptions = {
 
 class App extends Component {
   componentDidMount() {
-    // store.dispatch(loadUser());
+    store.dispatch(loadUser());
   }
 
   render() {
@@ -39,9 +46,10 @@ class App extends Component {
               <Alerts />
               <Container>
                 <Switch>
-                  <Route exact path="/" component={Login} />
-                  <Route exact path="/register" component={Register} />
+                  {/* auth stuff */}
+                  <Route exact path="/" component={Home} />
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/u/:username" component={Profile} />
                 </Switch>
               </Container>
             </Fragment>

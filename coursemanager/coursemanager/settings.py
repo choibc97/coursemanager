@@ -29,21 +29,23 @@ ALLOWED_HOSTS = ['localhost', '167.99.113.156', 'masters.benjaminchoi.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+    # custom apps
+    'frontend',
+    'accounts',
+    'courses',
 
     # apps from pip
     'rest_framework',
     'knox',
     'annoying',
 
-    # custom apps
-    'frontend',
-    'accounts'
+    # default apps
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

@@ -17,7 +17,11 @@ export class Alerts extends Component {
     }
 
     if (message !== prevProps.message) {
+      // errors
       if (message.privateRouteFail) alert.error(message.privateRouteFail);
+
+      // successes
+      if (message.login) alert.success(message.login);
     }
   }
 
