@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     # apps from pip
     'rest_framework',
     'knox',
-    'annoying',
+    'rest_access_policy',
 
     # default apps
     'django.contrib.admin',

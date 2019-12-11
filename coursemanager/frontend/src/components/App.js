@@ -19,6 +19,9 @@ import Home from "./home/Home";
 import Login from "./accounts/Login";
 import Profile from "./accounts/Profile";
 
+// courses stuff
+import Courses from "./courses/Courses";
+
 import Container from "react-bootstrap/Container";
 
 import { Provider } from "react-redux";
@@ -50,6 +53,9 @@ class App extends Component {
                   <Route exact path="/" component={Home} />
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/u/:username" component={Profile} />
+
+                  {/* courses stuff */}
+                  <PrivateRoute exact path="/courses" component={Courses} />
                 </Switch>
               </Container>
             </Fragment>

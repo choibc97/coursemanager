@@ -2,9 +2,9 @@ autopep8==1.4.4
 cffi==1.13.2
 cryptography==2.8
 Django==2.2.7
-django-annoying==0.10.5
 django-rest-knox==4.1.0
 djangorestframework==3.10.3
+drf-access-policy==0.5.0
 gunicorn==20.0.0
 pep8==1.7.1
 Pillow==6.2.1

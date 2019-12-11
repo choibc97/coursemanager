@@ -7,9 +7,12 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
 
+import { logout } from "../../actions/auth";
+
 export class Header extends Component {
   static propTypes = {
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired
   };
 
   render() {
@@ -22,17 +25,19 @@ export class Header extends Component {
     return (
       <Navbar expand="sm">
         <Container>
-          <Navbar.Brand href="#" sticky="top">
+          <Navbar.Brand href="/#/" sticky="top">
             Home
           </Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
             <Nav className="mr-auto">
-              <Nav.Link href="#feature">Feature</Nav.Link>
+              <Nav.Link href="/#/courses">Courses</Nav.Link>
             </Nav>
             <Nav>
-              <NavDropdown title={"filler"}>
-                <NavDropdown.Item href="#profile">Profile</NavDropdown.Item>
+              <NavDropdown title={`${user.username}`}>
+                <NavDropdown.Item onClick={this.props.logout}>
+                  Logout
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
@@ -46,6 +51,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = { logout };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

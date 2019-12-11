@@ -41,3 +41,6 @@ class StudentAssignment(models.Model):
     completed = models.BooleanField(default=False)
     points_earned = models.PositiveSmallIntegerField()
     timestamp = models.DateTimeField(auto_now=True)
+    grader = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='graded_assignments', blank=True)
+    comment = models.TextField(blank=True)

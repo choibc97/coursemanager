@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { Redirect } from "react-router-dom";
 
-import Spinner from "react-bootstrap/Spinner";
+import Loader from "../common/Loader";
 
 export class Home extends Component {
   static propTypes = {
@@ -15,20 +15,12 @@ export class Home extends Component {
     const { isAuthenticated, isLoading } = this.props.auth;
 
     if (isLoading) {
-      return (
-        <div className="text-center">
-          <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        </div>
-      );
-    }
-
-    if (!isAuthenticated) {
+      return <Loader />;
+    } else if (!isAuthenticated) {
       return <Redirect to="/login" />;
     }
 
-    return <div>Hello</div>;
+    return <Redirect to="/courses" />;
   }
 }
 

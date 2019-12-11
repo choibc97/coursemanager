@@ -22,6 +22,7 @@ export class Alerts extends Component {
 
       // successes
       if (message.login) alert.success(message.login);
+      if (message.logout) alert.success(message.logout);
     }
   }
 

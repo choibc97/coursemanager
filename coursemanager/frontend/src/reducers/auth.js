@@ -30,16 +30,16 @@ export default function(state = initialState, action) {
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       return {
-        ...state,
         isAuthenticated: true,
         isLoading: false,
-        user: action.payload.user
+        user: action.payload.user,
+        token: action.payload.token
       };
     case LOGOUT_SUCCESS:
     case AUTH_ERROR:
       localStorage.removeItem("token");
       return {
-        token: "",
+        token: null,
         user: null,
         isAuthenticated: false,
         isLoading: false

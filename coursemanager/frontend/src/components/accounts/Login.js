@@ -9,7 +9,7 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { login } from "../../actions/auth";
 
@@ -68,9 +68,6 @@ export class Login extends Component {
                     <Button type="submit">Login</Button>
                   </Form.Group>
                 </Form>
-                <p>
-                  Don't have an account? <Link to="/register">Register</Link>
-                </p>
               </Card.Body>
             </Card>
           </Col>
