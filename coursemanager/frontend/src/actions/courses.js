@@ -13,11 +13,11 @@ export const createCourse = course => (dispatch, getState) => {
         payload: res.data
       });
       dispatch(createMessage({ createCourse: "Course created" }));
-      return true;
+      return res.data;
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
-      return false;
+      return null;
     });
 };
 
@@ -31,11 +31,11 @@ export const deleteCourse = id => (dispatch, getState) => {
         payload: id
       });
       dispatch(createMessage({ deleteCourse: "Course deleted" }));
-      return true;
+      return id;
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
-      return false;
+      return null;
     });
 };
 
@@ -49,10 +49,10 @@ export const editCourse = course => (dispatch, getState) => {
         payload: res.data
       });
       dispatch(createMessage({ editCourse: "Course edited" }));
-      return true;
+      return res.data;
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
-      return false;
+      return null;
     });
 };

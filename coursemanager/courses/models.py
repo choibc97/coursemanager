@@ -6,7 +6,7 @@ User = settings.AUTH_USER_MODEL
 
 
 class Course(models.Model):
-    id = models.CharField(max_length=100, unique=True, primary_key=True)
+    course_id = models.CharField(max_length=100, unique=True)
     title = models.CharField(max_length=100, unique=True)
     instructors = models.ManyToManyField(
         User, related_name='instructor_courses')

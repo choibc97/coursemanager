@@ -69,7 +69,7 @@ export class Courses extends Component {
             <Col className="col-auto mr-auto">
               <Link
                 to={`/courses/view/${course.id}`}
-              >{`${course.id}: ${course.title}`}</Link>
+              >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
             <Col className="col-auto">Instructor</Col>
           </Row>
@@ -79,7 +79,7 @@ export class Courses extends Component {
             <Col className="col-auto mr-auto">
               <Link
                 to={`/courses/view/${course.id}`}
-              >{`${course.id}: ${course.title}`}</Link>
+              >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
             <Col>TA</Col>
           </Row>
@@ -89,7 +89,7 @@ export class Courses extends Component {
             <Col className="col-auto mr-auto">
               <Link
                 to={`/courses/view/${course.id}`}
-              >{`${course.id}: ${course.title}`}</Link>
+              >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
             <Col>Student</Col>
           </Row>

@@ -40,7 +40,7 @@ export default function(state = initialState, action) {
       return {
         ...state,
         instructorCourses: state.instructorCourses.filter(
-          course => course.id !== action.payload
+          course => course.id != action.payload
         )
       };
     case EDIT_COURSE:

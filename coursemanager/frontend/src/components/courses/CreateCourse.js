@@ -16,9 +16,9 @@ export class CreateCourse extends Component {
   };
 
   state = {
-    id: "",
+    courseId: "",
     title: "",
-    created: false
+    created: null
   };
 
   onChange = e => {
@@ -28,9 +28,10 @@ export class CreateCourse extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const { id, title } = this.state;
+    const course_id = this.state.courseId;
+    const title = this.state.title;
     const instructors = [this.props.user.id];
-    const course = { id, title, instructors };
+    const course = { course_id, title, instructors };
 
     this.props
       .createCourse(course)
@@ -45,7 +46,7 @@ export class CreateCourse extends Component {
     }
 
     if (this.state.created) {
-      return <Redirect to={`/courses/view/${this.state.id}`} />;
+      return <Redirect to={`/courses/view/${this.state.created.id}`} />;
     }
 
     return (
@@ -57,8 +58,8 @@ export class CreateCourse extends Component {
             <Form.Control
               onChange={this.onChange}
               type="text"
-              name="id"
-              value={this.state.id}
+              name="courseId"
+              value={this.state.courseId}
               placeholder="CSE 131"
             />
           </Form.Group>

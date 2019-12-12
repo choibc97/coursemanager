@@ -14,6 +14,7 @@ import PrivateRoute from "./common/PrivateRoute";
 
 // home stuff
 import Home from "./home/Home";
+import About from "./home/About";
 
 // accounts stuff
 import Login from "./accounts/Login";
@@ -52,8 +53,11 @@ class App extends Component {
               <Alerts />
               <Container>
                 <Switch>
-                  {/* auth stuff */}
+                  {/* home stuff */}
                   <Route exact path="/" component={Home} />
+                  <Route exact path="/about" component={About} />
+
+                  {/* auth stuff */}
                   <Route exact path="/login" component={Login} />
                   <Route exact path="/u/:username" component={Profile} />
 
@@ -66,12 +70,12 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact
-                    path="/courses/view/:course"
+                    path="/courses/view/:id"
                     component={Course}
                   />
                   <PrivateRoute
                     exact
-                    path="/courses/edit/:course"
+                    path="/courses/edit/:id"
                     component={EditCourse}
                   />
                 </Switch>

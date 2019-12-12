@@ -32,6 +32,7 @@ export class Header extends Component {
           <Navbar.Collapse>
             <Nav className="mr-auto">
               <Nav.Link href="/#/courses">Courses</Nav.Link>
+              <Nav.Link href="/#/about">About</Nav.Link>
             </Nav>
             <Nav>
               <NavDropdown title={`${user.username}`}>

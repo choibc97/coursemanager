@@ -21,16 +21,14 @@ export class Course extends Component {
   };
 
   state = {
-    deleted: false
+    deleted: null
   };
 
   onDelete = e => {
     e.preventDefault();
 
-    const courseId = this.props.match.params.course;
-    this.props
-      .deleteCourse(courseId)
-      .then(res => this.setState({ deleted: res }));
+    const id = this.props.match.params.id;
+    this.props.deleteCourse(id).then(res => this.setState({ deleted: res }));
   };
 
   render() {
@@ -38,11 +36,11 @@ export class Course extends Component {
       return <Redirect to="/courses" />;
     }
 
-    const courseId = this.props.match.params.course;
+    const id = this.props.match.params.id;
     const isStaff = this.props.user.is_staff;
-    const isInstructor = this.props.instructorCourses.has(courseId);
-    const isTa = this.props.taCourses.has(courseId);
-    const isStudent = this.props.studentCourses.has(courseId);
+    const isInstructor = this.props.instructorCourses.has(id);
+    const isTa = this.props.taCourses.has(id);
+    const isStudent = this.props.studentCourses.has(id);
 
     const noPermissions = !isInstructor && !isTa && !isStudent;
     if (noPermissions) {
@@ -58,25 +56,25 @@ export class Course extends Component {
     }
 
     const course = isInstructor
-      ? this.props.instructorCourses.get(courseId)
+      ? this.props.instructorCourses.get(id)
       : isTa
-      ? this.props.taCourses.get(courseId)
+      ? this.props.taCourses.get(id)
       : isStudent
-      ? this.props.studentCourses.get(courseId)
+      ? this.props.studentCourses.get(id)
       : null;
 
     return (
       <Container>
         <Row className="align-items-center mb-3">
           <Col className="col-auto mr-auto">
-            <h2>{`${course.id}: ${course.title}`}</h2>
+            <h2>{`${course.course_id}: ${course.title}`}</h2>
           </Col>
           {isStaff || isInstructor ? (
             <Col className="col-auto">
               <ButtonGroup aria-label="Edit or delete course">
                 <Button
                   variant="outline-primary"
-                  href={`/#/courses/edit/${courseId}`}
+                  href={`/#/courses/edit/${id}`}
                 >
                   Edit
                 </Button>
@@ -125,13 +123,13 @@ export class Course extends Component {
 const mapStateToProps = state => ({
   user: state.auth.user,
   instructorCourses: new Map(
-    state.courses.instructorCourses.map(course => [course.id, course])
+    state.courses.instructorCourses.map(course => [`${course.id}`, course])
   ),
   taCourses: new Map(
-    state.courses.taCourses.map(course => [course.id, course])
+    state.courses.taCourses.map(course => [`${course.id}`, course])
   ),
   studentCourses: new Map(
-    state.courses.studentCourses.map(course => [course.id, course])
+    state.courses.studentCourses.map(course => [`${course.id}`, course])
   )
 });
 
