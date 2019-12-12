@@ -9,6 +9,8 @@ import Col from "react-bootstrap/Col";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
 
+import ConfirmModal from "../common/ConfirmModal";
+
 import { deleteCourse } from "../../actions/courses";
 
 export class Course extends Component {
@@ -21,7 +23,18 @@ export class Course extends Component {
   };
 
   state = {
-    deleted: null
+    deleted: null,
+    showConfirmModal: false
+  };
+
+  onShow = e => {
+    e.preventDefault();
+
+    this.setState({ showConfirmModal: true });
+  };
+
+  onHide = e => {
+    this.setState({ showConfirmModal: false });
   };
 
   onDelete = e => {
@@ -65,6 +78,12 @@ export class Course extends Component {
 
     return (
       <Container>
+        <ConfirmModal
+          show={this.state.showConfirmModal}
+          msg="Are you sure you want to delete this course?"
+          onHide={this.onHide}
+          confirm={this.onDelete}
+        />
         <Row className="align-items-center mb-3">
           <Col className="col-auto mr-auto">
             <h2>{`${course.course_id}: ${course.title}`}</h2>
@@ -78,7 +97,7 @@ export class Course extends Component {
                 >
                   Edit
                 </Button>
-                <Button variant="outline-danger" onClick={this.onDelete}>
+                <Button variant="outline-danger" onClick={this.onShow}>
                   Delete
                 </Button>
               </ButtonGroup>
