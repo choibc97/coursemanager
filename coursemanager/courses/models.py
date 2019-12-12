@@ -14,6 +14,9 @@ class Course(models.Model):
     students = models.ManyToManyField(
         User, related_name='student_courses', blank=True)
 
+    def __str__(self):
+        return f'{self.id}: {self.title}'
+
 
 class AssignmentGroup(models.Model):
     course = models.ForeignKey(

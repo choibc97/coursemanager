@@ -7,13 +7,13 @@ from rest_access_policy import AccessPolicy
 class CourseAccessPolicy(AccessPolicy):
     statements = [
         {
-            'action': ['retrieve', 'destroy', 'update'],
+            'action': ['destroy', 'update', 'partial_update', 'retrieve'],
             'principal': 'authenticated',
             'effect': 'allow',
-            'condition': ['is_staff', 'is_instructor']
+            'condition': 'is_instructor'
         },
         {
-            'action': ['list', 'create'],
+            'action': '*',
             'principal': 'authenticated',
             'effect': 'allow',
             'condition': 'is_staff'
@@ -25,10 +25,15 @@ class CourseAccessPolicy(AccessPolicy):
 
     def is_instructor(self, request, view, action):
         course = view.get_object()
-        return course.instructors.filter(username=request.username).exists()
+        return course.instructors.filter(
+            username=request.user.username).exists()
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-    queryset = Course.objects.all()
     serializer_class = CourseSerializer
     permission_classes = [CourseAccessPolicy]
+
+    def get_queryset(self):
+        queryset = Course.objects.all().order_by('id')
+        queryset = self.get_serializer_class().setup_eager_loading(queryset)
+        return queryset

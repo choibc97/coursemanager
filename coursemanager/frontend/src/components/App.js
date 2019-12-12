@@ -21,6 +21,9 @@ import Profile from "./accounts/Profile";
 
 // courses stuff
 import Courses from "./courses/Courses";
+import CreateCourse from "./courses/CreateCourse";
+import Course from "./courses/Course";
+import EditCourse from "./courses/EditCourse";
 
 import Container from "react-bootstrap/Container";
 
@@ -56,6 +59,21 @@ class App extends Component {
 
                   {/* courses stuff */}
                   <PrivateRoute exact path="/courses" component={Courses} />
+                  <PrivateRoute
+                    exact
+                    path="/courses/create"
+                    component={CreateCourse}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/courses/view/:course"
+                    component={Course}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/courses/edit/:course"
+                    component={EditCourse}
+                  />
                 </Switch>
               </Container>
             </Fragment>

@@ -11,6 +11,12 @@ class UserSerializer(serializers.ModelSerializer):
                   'first_name', 'last_name', 'is_staff')
 
 
+class UserStudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')
+
+
 # login serializer
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()

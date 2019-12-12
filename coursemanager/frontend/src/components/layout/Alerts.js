@@ -13,7 +13,9 @@ export class Alerts extends Component {
     const { error, alert, message } = this.props;
 
     if (error !== prevProps.error) {
-      alert.error("Error");
+      if (error.msg.id) alert.error(`ID: ${error.msg.id.join(", ")}`);
+      if (error.msg.title) alert.error(`Title: ${error.msg.title.join(", ")}`);
+      if (error.status === 403) alert.error(`${error.msg.detail}`);
     }
 
     if (message !== prevProps.message) {
@@ -23,6 +25,8 @@ export class Alerts extends Component {
       // successes
       if (message.login) alert.success(message.login);
       if (message.logout) alert.success(message.logout);
+      if (message.createCourse) alert.success(message.createCourse);
+      if (message.deleteCourse) alert.success(message.deleteCourse);
     }
   }
 

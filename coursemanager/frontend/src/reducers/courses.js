@@ -3,7 +3,10 @@ import {
   USER_LOADING,
   USER_LOADED,
   AUTH_ERROR,
-  LOGOUT_SUCCESS
+  LOGOUT_SUCCESS,
+  CREATE_COURSE,
+  DELETE_COURSE,
+  EDIT_COURSE
 } from "../actions/types";
 
 const initialState = {
@@ -27,6 +30,25 @@ export default function(state = initialState, action) {
         instructorCourses: action.payload.instructor_courses,
         taCourses: action.payload.ta_courses,
         studentCourses: action.payload.student_courses
+      };
+    case CREATE_COURSE:
+      return {
+        ...state,
+        instructorCourses: [action.payload, ...state.instructorCourses]
+      };
+    case DELETE_COURSE:
+      return {
+        ...state,
+        instructorCourses: state.instructorCourses.filter(
+          course => course.id !== action.payload
+        )
+      };
+    case EDIT_COURSE:
+      return {
+        ...state,
+        instructorCourses: state.instructorCourses.map(course =>
+          course.id === action.payload.id ? action.payload : course
+        )
       };
     case AUTH_ERROR:
     case LOGOUT_SUCCESS:

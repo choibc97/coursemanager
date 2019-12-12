@@ -2,6 +2,7 @@ from rest_framework import generics, permissions
 from rest_framework.response import Response
 from knox.models import AuthToken
 from .serializers import UserSerializer, LoginSerializer
+from courses.serializers import CourseStudentSerializer, CourseSerializer
 
 
 # login api
@@ -18,9 +19,12 @@ class LoginAPI(generics.GenericAPIView):
             'user': UserSerializer(
                 user, context=self.get_serializer_context()).data,
             'token': token,
-            'instructor_courses': user.instructor_courses.all().order_by('id'),
-            'ta_courses': user.ta_courses.all().order_by('id'),
-            'student_courses': user.student_courses.all().order_by('id')
+            'instructor_courses': CourseSerializer(
+                user.instructor_courses.all().order_by('id'), many=True).data,
+            'ta_courses': CourseSerializer(
+                user.ta_courses.all().order_by('id'), many=True).data,
+            'student_courses': CourseStudentSerializer(
+                user.student_courses.all().order_by('id'), many=True).data
         })
 
 
@@ -37,7 +41,10 @@ class UserAPI(generics.RetrieveAPIView):
         return Response({
             'user': UserSerializer(
                 user, context=self.get_serializer_context()).data,
-            'instructor_courses': user.instructor_courses.all().order_by('id'),
-            'ta_courses': user.ta_courses.all().order_by('id'),
-            'student_courses': user.student_courses.all().order_by('id')
+            'instructor_courses': CourseSerializer(
+                user.instructor_courses.all().order_by('id'), many=True).data,
+            'ta_courses': CourseSerializer(
+                user.ta_courses.all().order_by('id'), many=True).data,
+            'student_courses': CourseStudentSerializer(
+                user.student_courses.all().order_by('id'), many=True).data
         })

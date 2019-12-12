@@ -1,10 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 import Loader from "../common/Loader";
 
@@ -27,26 +29,68 @@ export class Courses extends Component {
       return <Loader />;
     }
 
+    const noCourses =
+      instructorCourses.length === 0 &&
+      taCourses.length === 0 &&
+      studentCourses.length === 0;
+
     return (
       <Container>
-        {instructorCourses.map(course => (
+        <Row className="align-items-center mb-3">
+          <Col className="col-auto mr-auto">
+            <h2>Courses</h2>
+          </Col>
+          {isStaff ? (
+            <Col className="col-auto">
+              <Button href="/#/courses/create" variant="outline-success">
+                Create Course
+              </Button>
+            </Col>
+          ) : null}
+        </Row>
+        {noCourses ? (
+          <Row className="mb-3">
+            <Col>
+              <p>There are no courses to show</p>
+            </Col>
+          </Row>
+        ) : (
           <Row>
-            <Col>{course.id}</Col>
-            <Col>{course.title}</Col>
-            <Col>Instructor</Col>
+            <Col className="col-auto mr-auto">
+              <h4>Course</h4>
+            </Col>
+            <Col className="col-auto">
+              <h4>Role</h4>
+            </Col>
+          </Row>
+        )}
+        {instructorCourses.map(course => (
+          <Row key={course.id}>
+            <Col className="col-auto mr-auto">
+              <Link
+                to={`/courses/view/${course.id}`}
+              >{`${course.id}: ${course.title}`}</Link>
+            </Col>
+            <Col className="col-auto">Instructor</Col>
           </Row>
         ))}
         {taCourses.map(course => (
-          <Row>
-            <Col>{course.id}</Col>
-            <Col>{course.title}</Col>
+          <Row key={course.id}>
+            <Col className="col-auto mr-auto">
+              <Link
+                to={`/courses/view/${course.id}`}
+              >{`${course.id}: ${course.title}`}</Link>
+            </Col>
             <Col>TA</Col>
           </Row>
         ))}
         {studentCourses.map(course => (
-          <Row>
-            <Col>{course.id}</Col>
-            <Col>{course.title}</Col>
+          <Row key={course.id}>
+            <Col className="col-auto mr-auto">
+              <Link
+                to={`/courses/view/${course.id}`}
+              >{`${course.id}: ${course.title}`}</Link>
+            </Col>
             <Col>Student</Col>
           </Row>
         ))}
