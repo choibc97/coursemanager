@@ -25,8 +25,7 @@ class CourseAccessPolicy(AccessPolicy):
 
     def is_instructor(self, request, view, action):
         course = view.get_object()
-        return course.instructors.filter(
-            username=request.user.username).exists()
+        return course.instructors.filter(email=request.user.email).exists()
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -34,6 +33,6 @@ class CourseViewSet(viewsets.ModelViewSet):
     permission_classes = [CourseAccessPolicy]
 
     def get_queryset(self):
-        queryset = Course.objects.all().order_by('id')
+        queryset = Course.objects.all().order_by('course_id')
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset
