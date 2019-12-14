@@ -7,8 +7,7 @@ from .models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email',
-                  'first_name', 'last_name', 'is_staff')
+        fields = ('id', 'email', 'first_name', 'last_name', 'is_staff')
 
 
 class UserStudentSerializer(serializers.ModelSerializer):
@@ -19,7 +18,7 @@ class UserStudentSerializer(serializers.ModelSerializer):
 
 # login serializer
 class LoginSerializer(serializers.Serializer):
-    username = serializers.CharField()
+    email = serializers.CharField()
     password = serializers.CharField()
 
     def validate(self, data):

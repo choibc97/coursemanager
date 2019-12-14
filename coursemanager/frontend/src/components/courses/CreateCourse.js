@@ -18,6 +18,7 @@ export class CreateCourse extends Component {
   state = {
     courseId: "",
     title: "",
+    tas: "",
     created: null
   };
 

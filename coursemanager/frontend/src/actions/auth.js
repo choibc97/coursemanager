@@ -29,7 +29,7 @@ export const loadUser = () => (dispatch, getState) => {
 };
 
 // login user
-export const login = (username, password) => dispatch => {
+export const login = (email, password) => dispatch => {
   // headers
   const config = {
     headers: {
@@ -37,11 +37,8 @@ export const login = (username, password) => dispatch => {
     }
   };
 
-  // make username case insensitive
-  username = username.toLowerCase();
-
   // request body
-  const body = JSON.stringify({ username, password });
+  const body = JSON.stringify({ email, password });
 
   axios
     .post("/api/auth/login", body, config)

@@ -35,7 +35,7 @@ export class Header extends Component {
               <Nav.Link href="/#/about">About</Nav.Link>
             </Nav>
             <Nav>
-              <NavDropdown title={`${user.username}`}>
+              <NavDropdown title={`${user.email}`}>
                 <NavDropdown.Item onClick={this.props.logout}>
                   Logout
                 </NavDropdown.Item>

@@ -20,11 +20,11 @@ class LoginAPI(generics.GenericAPIView):
                 user, context=self.get_serializer_context()).data,
             'token': token,
             'instructor_courses': CourseSerializer(
-                user.instructor_courses.all().order_by('id'), many=True).data,
+                user.instructor_courses.all().order_by('course_id'), many=True).data,
             'ta_courses': CourseSerializer(
-                user.ta_courses.all().order_by('id'), many=True).data,
+                user.ta_courses.all().order_by('course_id'), many=True).data,
             'student_courses': CourseStudentSerializer(
-                user.student_courses.all().order_by('id'), many=True).data
+                user.student_courses.all().order_by('course_id'), many=True).data
         })
 
 
@@ -42,9 +42,9 @@ class UserAPI(generics.RetrieveAPIView):
             'user': UserSerializer(
                 user, context=self.get_serializer_context()).data,
             'instructor_courses': CourseSerializer(
-                user.instructor_courses.all().order_by('id'), many=True).data,
+                user.instructor_courses.all().order_by('course_id'), many=True).data,
             'ta_courses': CourseSerializer(
-                user.ta_courses.all().order_by('id'), many=True).data,
+                user.ta_courses.all().order_by('course_id'), many=True).data,
             'student_courses': CourseStudentSerializer(
-                user.student_courses.all().order_by('id'), many=True).data
+                user.student_courses.all().order_by('course_id'), many=True).data
         })

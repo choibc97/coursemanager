@@ -20,7 +20,7 @@ export class Login extends Component {
   };
 
   state = {
-    username: "",
+    email: "",
     password: ""
   };
 
@@ -30,7 +30,7 @@ export class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    this.props.login(this.state.username, this.state.password);
+    this.props.login(this.state.email, this.state.password);
   };
 
   render() {
@@ -47,12 +47,12 @@ export class Login extends Component {
                 <h2 className="text-center">Login</h2>
                 <Form onSubmit={this.onSubmit}>
                   <Form.Group>
-                    <Form.Label>WUSTL Key</Form.Label>
+                    <Form.Label>WUSTL Email</Form.Label>
                     <Form.Control
                       type="text"
                       onChange={this.onChange}
-                      name="username"
-                      value={this.state.username}
+                      name="email"
+                      value={this.state.email}
                     />
                   </Form.Group>
                   <Form.Group>

@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'frontend',
     'accounts',
     'courses',
+    'assignments',
 
     # apps from pip
     'rest_framework',
