@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import AssignmentGroup, Assignment
 
-# Register your models here.
+admin.site.register(AssignmentGroup)
+admin.site.register(Assignment)

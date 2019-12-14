@@ -1,6 +1,6 @@
 from .models import Course
 from .serializers import CourseSerializer
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets
 from rest_access_policy import AccessPolicy
 
 
