@@ -13,6 +13,7 @@ import Tab from "react-bootstrap/Tab";
 
 import ConfirmModal from "../common/ConfirmModal";
 import CourseAssignments from "./CourseAssignments";
+import CourseInstructors from "./CourseInstructors";
 
 import { deleteCourse } from "../../actions/courses";
 
@@ -53,7 +54,6 @@ export class Course extends Component {
     }
 
     const id = this.props.match.params.course;
-    const isStaff = this.props.user.is_staff;
     const isInstructor = this.props.instructorCourses.has(id);
     const isTa = this.props.taCourses.has(id);
     const isStudent = this.props.studentCourses.has(id);
@@ -91,7 +91,7 @@ export class Course extends Component {
           <Col className="col-auto mr-auto">
             <h2>{`${course.course_id}: ${course.title}`}</h2>
           </Col>
-          {isStaff || isInstructor ? (
+          {isInstructor ? (
             <Col className="col-auto">
               <ButtonGroup aria-label="Edit or delete course">
                 <Button
@@ -113,41 +113,12 @@ export class Course extends Component {
             <CourseAssignments course={course} />
           </Tab>
           <Tab eventKey="instructors" title="Instructors">
-            <Row className="align-items-center">
-              <Col className="col-auto mr-auto">
-                <h4>Instructors</h4>
-              </Col>
-              {isStaff || isInstructor ? (
-                <Col className="col-auto">
-                  <Button variant="outline-primary">Edit</Button>
-                </Col>
-              ) : null}
-            </Row>
+            <CourseInstructors course={course} />
           </Tab>
-          <Tab eventKey="tas" title="TAs">
-            <Row className="align-items-center">
-              <Col className="col-auto mr-auto">
-                <h4>TAs</h4>
-              </Col>
-              {isStaff || isInstructor ? (
-                <Col className="col-auto">
-                  <Button variant="outline-primary">Edit</Button>
-                </Col>
-              ) : null}
-            </Row>
-          </Tab>
-          <Tab eventKey="students" title="Students">
-            <Row className="align-items-center">
-              <Col className="col-auto mr-auto">
-                <h4>Students</h4>
-              </Col>
-              {isStaff || isInstructor ? (
-                <Col className="col-auto">
-                  <Button variant="outline-primary">Edit</Button>
-                </Col>
-              ) : null}
-            </Row>
-          </Tab>
+          <Tab eventKey="tas" title="TAs"></Tab>
+          {isInstructor || isTa ? (
+            <Tab eventKey="students" title="Students"></Tab>
+          ) : null}
         </Tabs>
       </Container>
     );

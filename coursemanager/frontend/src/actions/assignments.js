@@ -1,10 +1,10 @@
 import axios from "axios";
 import { returnErrors, createMessage } from "./messages";
 import { tokenConfig } from "./auth";
-import { CREATE_ASSIGNMENT_GROUP } from "./types";
+import { CREATE_ASSIGNMENT_GROUP, GET_ASSIGNMENT_GROUPS } from "./types";
 
 // create an assignment group
-export const createAssignmentGroup = (assignmentGroup = (
+export const createAssignmentGroup = assignmentGroup => (
   dispatch,
   getState
 ) => {
@@ -18,10 +18,34 @@ export const createAssignmentGroup = (assignmentGroup = (
       dispatch(
         createMessage({ createAssignmentGroup: "Assignment group created" })
       );
-      return res.data;
+      return res;
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
       return null;
     });
-});
+};
+
+// get assignment groups for a course
+export const getAssignmentGroups = course => (dispatch, getState) => {
+  axios
+    .get(
+      "/api/assignment_groups/",
+      addCourseToConfig(tokenConfig(getState), course)
+    )
+    .then(res => {
+      dispatch({
+        type: GET_ASSIGNMENT_GROUPS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+// adds the given course to the given config as a param
+export const addCourseToConfig = (config, course) => {
+  config.params = { course };
+  return config;
+};

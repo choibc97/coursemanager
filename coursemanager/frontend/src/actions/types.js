@@ -16,3 +16,4 @@ export const EDIT_COURSE = "EDIT_COURSE";
 
 // assignments related stuff
 export const CREATE_ASSIGNMENT_GROUP = "CREATE_ASSIGNMENT_GROUP";
+export const GET_ASSIGNMENT_GROUPS = "GET_ASSIGNMENT_GROUPS";
