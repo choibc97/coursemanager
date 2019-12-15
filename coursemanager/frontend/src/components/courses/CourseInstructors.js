@@ -31,8 +31,8 @@ export class CourseInstructors extends Component {
 
   render() {
     const isInstructor = new Set(
-      this.props.course.instructors.map(instructor => instructor.id)
-    ).has(this.props.user.id);
+      this.props.course.instructors.map(instructor => instructor.email)
+    ).has(this.props.user.email);
 
     const addForm = (
       <Form onSubmit={this.onSubmit}>
@@ -68,7 +68,7 @@ export class CourseInstructors extends Component {
           </Row>
         ) : null}
         {this.props.course.instructors.map(instructor => (
-          <Row key={instructor.id}>
+          <Row key={instructor.email}>
             <Col className="col-auto mr-auto">{`${instructor.first_name} ${instructor.last_name}`}</Col>
             <Col className="col-auto">
               <a href={`mailto:${instructor.email}`}>{instructor.email}</a>

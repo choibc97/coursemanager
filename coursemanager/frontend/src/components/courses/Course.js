@@ -19,7 +19,6 @@ import { deleteCourse } from "../../actions/courses";
 
 export class Course extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
     instructorCourses: PropTypes.object.isRequired,
     taCourses: PropTypes.object.isRequired,
     studentCourses: PropTypes.object.isRequired,
@@ -126,7 +125,6 @@ export class Course extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   instructorCourses: new Map(
     state.courses.instructorCourses.map(course => [`${course.id}`, course])
   ),

@@ -58,8 +58,8 @@ export class CourseAssignments extends Component {
 
   render() {
     const isInstructor = new Set(
-      this.props.course.instructors.map(instructor => instructor.id)
-    ).has(this.props.user.id);
+      this.props.course.instructors.map(instructor => instructor.email)
+    ).has(this.props.user.email);
 
     const addForm = (
       <Form onSubmit={this.onSubmit}>

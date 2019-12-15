@@ -11,7 +11,6 @@ import { editCourse } from "../../actions/courses";
 
 export class EditCourse extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
     instructorCourses: PropTypes.object.isRequired,
     editCourse: PropTypes.func.isRequired
   };

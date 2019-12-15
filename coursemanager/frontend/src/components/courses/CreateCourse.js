@@ -31,7 +31,7 @@ export class CreateCourse extends Component {
 
     const course_id = this.state.courseId;
     const title = this.state.title;
-    const instructors = [this.props.user.id];
+    const instructors = [this.props.user.email];
     const course = { course_id, title, instructors };
 
     this.props
