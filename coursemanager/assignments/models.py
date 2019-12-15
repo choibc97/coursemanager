@@ -9,6 +9,9 @@ class AssignmentGroup(models.Model):
     points = models.PositiveSmallIntegerField()
     due_date = models.DateTimeField()
 
+    def __str__(self):
+        return f'{self.course.course_id}: {self.title}'
+
 
 class Assignment(models.Model):
     course = models.ForeignKey(
@@ -18,3 +21,6 @@ class Assignment(models.Model):
     title = models.CharField(max_length=100, unique=True)
     points = models.PositiveSmallIntegerField()
     due_date = models.DateTimeField()
+
+    def __str__(self):
+        return f'{self.course.course_id} {self.group.title} {self.title}'

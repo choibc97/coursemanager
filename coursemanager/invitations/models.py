@@ -16,3 +16,6 @@ class InstructorInvitation(models.Model):
                                on_delete=models.CASCADE,
                                related_name='instructor_invitations')
     expiration = models.DateTimeField()
+
+    def __str__(self):
+        return f'{self.course.course_id}: Instructor {self.recipient}'
