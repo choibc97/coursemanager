@@ -7,7 +7,7 @@ User = settings.AUTH_USER_MODEL
 
 
 class InstructorInvitation(models.Model):
-    token = models.CharField(max_length=10, primary_key=True)
+    token = models.CharField(max_length=50, primary_key=True)
     sender = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='instructor_invitations')

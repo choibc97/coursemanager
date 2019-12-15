@@ -4,9 +4,10 @@ from .managers import UserManager
 
 
 class User(AbstractUser):
+    id = None
     username = None
     # wustl email address: eg johndoe@wustl.edu
-    email = models.EmailField(unique=True)
+    email = models.EmailField(primary_key=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
