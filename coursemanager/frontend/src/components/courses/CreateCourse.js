@@ -47,7 +47,7 @@ export class CreateCourse extends Component {
     }
 
     if (this.state.created) {
-      return <Redirect to={`/courses/view/${this.state.created.id}`} />;
+      return <Redirect to={`/courses/${this.state.created.id}/view`} />;
     }
 
     return (

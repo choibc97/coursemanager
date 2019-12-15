@@ -68,7 +68,7 @@ export class Courses extends Component {
           <Row key={course.id}>
             <Col className="col-auto mr-auto">
               <Link
-                to={`/courses/view/${course.id}`}
+                to={`/courses/${course.id}/view`}
               >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
             <Col className="col-auto">Instructor</Col>
@@ -78,7 +78,7 @@ export class Courses extends Component {
           <Row key={course.id}>
             <Col className="col-auto mr-auto">
               <Link
-                to={`/courses/view/${course.id}`}
+                to={`/courses/${course.id}/view`}
               >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
             <Col>TA</Col>
@@ -88,7 +88,7 @@ export class Courses extends Component {
           <Row key={course.id}>
             <Col className="col-auto mr-auto">
               <Link
-                to={`/courses/view/${course.id}`}
+                to={`/courses/${course.id}/view`}
               >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
             <Col>Student</Col>

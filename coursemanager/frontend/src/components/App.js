@@ -70,12 +70,12 @@ class App extends Component {
                   />
                   <PrivateRoute
                     exact
-                    path="/courses/view/:id"
+                    path="/courses/:course/view"
                     component={Course}
                   />
                   <PrivateRoute
                     exact
-                    path="/courses/edit/:id"
+                    path="/courses/:course/edit"
                     component={EditCourse}
                   />
                 </Switch>

@@ -43,7 +43,7 @@ export class Course extends Component {
   onDelete = e => {
     e.preventDefault();
 
-    const id = this.props.match.params.id;
+    const id = this.props.match.params.course;
     this.props.deleteCourse(id).then(res => this.setState({ deleted: res }));
   };
 
@@ -52,7 +52,7 @@ export class Course extends Component {
       return <Redirect to="/courses" />;
     }
 
-    const id = this.props.match.params.id;
+    const id = this.props.match.params.course;
     const isStaff = this.props.user.is_staff;
     const isInstructor = this.props.instructorCourses.has(id);
     const isTa = this.props.taCourses.has(id);
@@ -96,7 +96,7 @@ export class Course extends Component {
               <ButtonGroup aria-label="Edit or delete course">
                 <Button
                   variant="outline-primary"
-                  href={`/#/courses/edit/${id}`}
+                  href={`/#/courses/${id}/edit`}
                 >
                   Edit
                 </Button>

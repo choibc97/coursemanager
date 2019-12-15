@@ -13,3 +13,6 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const CREATE_COURSE = "CREATE_COURSE";
 export const DELETE_COURSE = "DELETE_COURSE";
 export const EDIT_COURSE = "EDIT_COURSE";
+
+// assignments related stuff
+export const CREATE_ASSIGNMENT_GROUP = "CREATE_ASSIGNMENT_GROUP";

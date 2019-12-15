@@ -19,7 +19,7 @@ export class EditCourse extends Component {
   constructor(props) {
     super(props);
 
-    const id = this.props.match.params.id;
+    const id = this.props.match.params.course;
     const isInstructor = this.props.instructorCourses.has(id);
     const course = isInstructor ? this.props.instructorCourses.get(id) : null;
 
@@ -37,7 +37,7 @@ export class EditCourse extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    const id = this.props.match.params.id;
+    const id = this.props.match.params.course;
     const course = {
       id,
       course_id: this.state.courseId,
@@ -47,11 +47,11 @@ export class EditCourse extends Component {
   };
 
   render() {
-    const id = this.props.match.params.id;
+    const id = this.props.match.params.course;
     const isInstructor = this.props.instructorCourses.has(id);
 
     if (!isInstructor || this.state.edited) {
-      return <Redirect to={`/courses/view/${id}`} />;
+      return <Redirect to={`/courses/${id}/view`} />;
     }
 
     return (
@@ -63,7 +63,7 @@ export class EditCourse extends Component {
             <Form.Control
               onChange={this.onChange}
               type="text"
-              name="id"
+              name="courseId"
               value={this.state.courseId}
               placeholder="CSE 131"
             />
