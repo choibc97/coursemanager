@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'accounts',
     'courses',
     'assignments',
+    'invitations',
 
     # apps from pip
     'rest_framework',
