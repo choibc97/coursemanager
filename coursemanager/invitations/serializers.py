@@ -1,23 +1,8 @@
 from rest_framework import serializers
-from .models import InstructorInvitation
-
-import secrets
-import datetime
+from .models import RegisterInvitation
 
 
-class InstructorInvitationSerializer(serializers.ModelSerializer):
-    token = serializers.SerializerMethodField()
-    expiration = serializers.SerializerMethodField()
-
+class RegisterInvitationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = InstructorInvitation
+        model = RegisterInvitation
         fields = '__all__'
-
-    def get_token(self):
-        token = secrets.token_urlsafe(32)
-        while InstructorInvitation.objects.filter(token=token).exists():
-            token = secrets.token_urlsafe(32)
-        return token
-
-    def get_expiration(self):
-        return datetime.datetime.now() + datetime.timedelta(7)

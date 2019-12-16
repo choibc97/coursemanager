@@ -16,6 +16,19 @@ class UserStudentSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'last_name', 'email')
 
 
+# register serializer
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email',)
+
+    def create(self, validated_data):
+        user = User.objects.create_user(
+            validated_data['email'], is_active=False)
+
+        return user
+
+
 # login serializer
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField()

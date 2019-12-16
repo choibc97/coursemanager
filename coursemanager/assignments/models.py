@@ -24,3 +24,18 @@ class Assignment(models.Model):
 
     def __str__(self):
         return f'{self.course.course_id} {self.group.title} {self.title}'
+
+
+# class StudentAssignment(models.Model):
+#     assignment = models.ForeignKey(Assignment,
+#                                    on_delete=models.CASCADE,
+#                                    related_name='student_assignments')
+#     student = models.ForeignKey(User, on_delete=models.CASCADE,
+#                                 related_name='student_assignments')
+#     qr_code = models.ImageField()
+#     completed = models.BooleanField(default=False)
+#     points_earned = models.PositiveSmallIntegerField()
+#     timestamp = models.DateTimeField(auto_now=True)
+#     grader = models.ForeignKey(User, on_delete=models.CASCADE,
+#                                related_name='graded_assignments', blank=True)
+#     comment = models.TextField(blank=True)

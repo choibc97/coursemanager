@@ -27,6 +27,15 @@ export class CourseInstructors extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    const { id } = this.props.course;
+    const instructors = [
+      ...this.props.course.instructors.map(instructor => instructor.email),
+      ...this.state.instructors.split(",").filter(Boolean)
+    ];
+
+    const course = { id, instructors };
+    this.props.editCourse(course);
   };
 
   render() {
