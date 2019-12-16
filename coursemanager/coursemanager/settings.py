@@ -50,11 +50,24 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# start custom settings
+
+# SECRET_KEY is stored in secrets.py
+
 AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',)
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'wustlcoursemanager@gmail.com'
+# EMAIL_HOST_PASSWORD is stored in secrets.py
+
+# end custom settings
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

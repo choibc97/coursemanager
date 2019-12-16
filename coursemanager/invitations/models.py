@@ -26,4 +26,4 @@ class RegisterInvitation(models.Model):
     expiration = models.DateTimeField(default=get_expiration)
 
     def __str__(self):
-        return self.recipient
+        return self.recipient.email

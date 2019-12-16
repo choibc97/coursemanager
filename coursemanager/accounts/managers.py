@@ -7,10 +7,6 @@ class UserManager(BaseUserManager):
             raise ValueError('The given email must be set')
 
         email = self.normalize_email(email)
-
-        if not email.endswith('wustl.edu'):
-            raise ValueError('The email must be a wustl.edu address')
-
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
         user.save()

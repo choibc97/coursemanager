@@ -31,4 +31,4 @@ official documentation:
 reference documentation:
 
 - custom user model: <https://testdriven.io/blog/django-custom-user-model/>
-- python qr code generation: <https://medium.com/@ngengesenior/qr-codes-generation-with-python-377735be6c5f>
+- sending emails with django: <https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e>

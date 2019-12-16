@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
 from .models import User
+from invitations.serializers import RegisterInvitationSerializer
 
 
 # user serializer
@@ -25,6 +26,12 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = User.objects.create_user(
             validated_data['email'], is_active=False)
+
+        invitation_serializer = RegisterInvitationSerializer(data={
+            'recipient': user.email,
+        })
+        invitation_serializer.is_valid(raise_exception=True)
+        invitation_serializer.save()
 
         return user
 
