@@ -12,42 +12,35 @@ class CourseViewSet(viewsets.ModelViewSet):
     permission_classes = [CourseAccessPolicy]
 
     def create(self, request, *args, **kwargs):
-        self.add_or_create_users(request)
+        self.parse_users(request)
 
         return super().create(request, *args, **kwargs)
 
     def update(self, request, *args, **kwargs):
-        self.add_or_create_users(request)
+        self.parse_users(request)
 
         return super().update(request, *args, **kwargs)
 
-    def add_or_create_users(self, request):
+    def parse_users(self, request):
         instructors = request.data.get('instructors')
         if instructors:
-            for email in instructors:
-                if not User.objects.filter(email=email).exists():
-                    register_serializer = RegisterSerializer(
-                        data={'email': email})
-                    register_serializer.is_valid(raise_exception=True)
-                    register_serializer.save()
+            self.get_or_add_users(instructors)
 
         tas = request.data.get('tas')
         if tas:
-            for email in tas:
-                if not User.objects.filter(email=email).exists():
-                    register_serializer = RegisterSerializer(
-                        data={'email': email})
-                    register_serializer.is_valid(raise_exception=True)
-                    register_serializer.save()
+            self.get_or_add_users(tas)
 
         students = request.data.get('students')
         if students:
-            for email in students:
-                if not User.objects.filter(email=email).exists():
-                    register_serializer = RegisterSerializer(
-                        data={'email': email})
-                    register_serializer.is_valid(raise_exception=True)
-                    register_serializer.save()
+            self.get_or_add_users(students)
+
+    def get_or_add_users(self, users):
+        for email in users:
+            if not User.objects.filter(email=email).exists():
+                register_serializer = RegisterSerializer(
+                    data={'email': email})
+                register_serializer.is_valid(raise_exception=True)
+                register_serializer.save()
 
     def get_queryset(self):
         queryset = Course.objects.all().order_by('course_id')

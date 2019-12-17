@@ -11,7 +11,7 @@ class AssignmentGroupViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = AssignmentGroup.objects.all().order_by('points')
 
-        course = self.request.query_params['course']
+        course = self.request.query_params.get('course')
         if course:
             queryset = queryset.filter(course=course)
 

@@ -18,6 +18,7 @@ import About from "./home/About";
 
 // accounts stuff
 import Login from "./accounts/Login";
+import Register from "./accounts/Register";
 import Profile from "./accounts/Profile";
 
 // courses stuff
@@ -59,6 +60,7 @@ class App extends Component {
 
                   {/* auth stuff */}
                   <Route exact path="/login" component={Login} />
+                  <Route exact path="/register/:token" component={Register} />
                   <Route exact path="/u/:username" component={Profile} />
 
                   {/* courses stuff */}

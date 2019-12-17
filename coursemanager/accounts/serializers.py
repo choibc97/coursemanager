@@ -1,4 +1,5 @@
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, password_validation
+from django.core import exceptions
 from rest_framework import serializers
 from .models import User
 from invitations.serializers import RegisterInvitationSerializer
@@ -17,7 +18,7 @@ class UserStudentSerializer(serializers.ModelSerializer):
         fields = ('first_name', 'last_name', 'email')
 
 
-# register serializer
+# register with dummy password serializer
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -34,6 +35,40 @@ class RegisterSerializer(serializers.ModelSerializer):
         invitation_serializer.save()
 
         return user
+
+
+# register through registration invitation token
+class TokenRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'password')
+        extra_kwargs = {'password': {'write_only': True}}
+
+    def validate(self, data):
+        user = User(**data)
+        password = data.get('password')
+
+        errors = dict()
+        try:
+            password_validation.validate_password(password=password, user=User)
+        except exceptions.ValidationError as e:
+            errors['password'] = list(e.messages)
+
+        if errors:
+            raise serializers.ValidationError(errors)
+
+        return super().validate(data)
+
+    def update(self, instance, validated_data):
+        instance.first_name = validated_data.get(
+            'first_name', instance.first_name)
+        instance.last_name = validated_data.get(
+            'last_name', instance.last_name)
+        instance.is_active = True
+        instance.set_password(validated_data['password'])
+        instance.save()
+
+        return instance
 
 
 # login serializer

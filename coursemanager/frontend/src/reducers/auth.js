@@ -1,5 +1,6 @@
 import {
   LOGIN_SUCCESS,
+  REGISTER_SUCCESS,
   USER_LOADING,
   USER_LOADED,
   AUTH_ERROR,
@@ -28,10 +29,11 @@ export default function(state = initialState, action) {
         user: action.payload.user
       };
     case LOGIN_SUCCESS:
+    case REGISTER_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       return {
+        ...state,
         isAuthenticated: true,
-        isLoading: false,
         user: action.payload.user,
         token: action.payload.token
       };
@@ -39,6 +41,7 @@ export default function(state = initialState, action) {
     case AUTH_ERROR:
       localStorage.removeItem("token");
       return {
+        ...state,
         token: null,
         user: null,
         isAuthenticated: false,

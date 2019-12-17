@@ -32,3 +32,4 @@ reference documentation:
 
 - custom user model: <https://testdriven.io/blog/django-custom-user-model/>
 - sending emails with django: <https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e>
+- password validation: <https://stackoverflow.com/questions/36414804/integrate-django-password-validators-with-django-rest-framework-validate-passwor>

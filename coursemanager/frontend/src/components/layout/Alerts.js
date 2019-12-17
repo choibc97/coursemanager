@@ -29,9 +29,11 @@ export class Alerts extends Component {
     if (message !== prevProps.message) {
       // errors
       if (message.privateRouteFail) alert.error(message.privateRouteFail);
+      if (message.passwordMismatch) alert.error(message.passwordMismatch);
 
       // successes
       if (message.login) alert.success(message.login);
+      if (message.register) alert.success(message.register);
       if (message.logout) alert.success(message.logout);
       if (message.createCourse) alert.success(message.createCourse);
       if (message.deleteCourse) alert.success(message.deleteCourse);
