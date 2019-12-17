@@ -5,8 +5,7 @@ from courses.models import Course
 class AssignmentGroupAccessPolicy(AccessPolicy):
     statements = [
         {
-            'action': ['create', 'destroy', 'update', 'partial_update',
-                       'retrieve'],
+            'action': '*',
             'principal': 'authenticated',
             'effect': 'allow',
             'conditon': 'is_instructor'
@@ -23,7 +22,7 @@ class AssignmentGroupAccessPolicy(AccessPolicy):
         return request.user.is_staff
 
     def is_instructor(self, request, view, action):
-        if action == 'create':
+        if action == 'create' or action == 'list':
             course = Course.objects.get(request.data['course'])
             return course.instructors.filter(email=request.user.email).exists()
         else:
