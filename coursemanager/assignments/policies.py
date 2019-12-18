@@ -34,18 +34,38 @@ class AssignmentAccessPolicy(AccessPolicy):
         return request.user.is_staff
 
     def is_instructor(self, request, view, action):
-        if action == 'create' or action == 'list':
+        if action == 'create':
             course = Course.objects.get(request.data['course'])
             return course.instructors.filter(email=request.user.email).exists()
+        elif action == 'list':
+            id = request.query_params.get('course')
+            if id:
+                course = Course.objects.get(id=id)
+                return course.instructors.filter(email=request.user.email).exists()
+            return False
         else:
             instance = view.get_object()
             return instance.course.instructors.filter(
                 email=request.user.email).exists()
 
     def is_ta(self, request, view, action):
-        instance = view.get_object()
-        return instance.course.tas.filter(email=request.user.email).exists()
+        if action == 'retrieve':
+            instance = view.get_object()
+            return instance.course.tas.filter(email=request.user.email).exists()
+        else:
+            id = request.query_params.get('course')
+            if id:
+                course = Course.objects.get(id=id)
+                return course.tas.filter(email=request.user.email).exists()
+            return False
 
     def is_student(self, request, view, action):
-        instance = view.get_object()
-        return instance.course.students.filter(email=request.user.email).exists()
+        if action == 'retrieve':
+            instance = view.get_object()
+            return instance.course.students.filter(email=request.user.email).exists()
+        else:
+            id = request.query_params.get('course')
+            if id:
+                course = Course.objects.get(id=id)
+                return course.students.filter(email=request.user.email).exists()
+            return False
