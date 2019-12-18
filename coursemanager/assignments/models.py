@@ -1,5 +1,9 @@
 from django.db import models
 from courses.models import Course
+from django.conf import settings
+
+
+User = settings.AUTH_USER_MODEL
 
 
 class AssignmentGroup(models.Model):
@@ -26,16 +30,16 @@ class Assignment(models.Model):
         return f'{self.course.course_id} {self.group.title} {self.title}'
 
 
-# class StudentAssignment(models.Model):
-#     assignment = models.ForeignKey(Assignment,
-#                                    on_delete=models.CASCADE,
-#                                    related_name='student_assignments')
-#     student = models.ForeignKey(User, on_delete=models.CASCADE,
-#                                 related_name='student_assignments')
-#     qr_code = models.ImageField()
-#     completed = models.BooleanField(default=False)
-#     points_earned = models.PositiveSmallIntegerField()
-#     timestamp = models.DateTimeField(auto_now=True)
-#     grader = models.ForeignKey(User, on_delete=models.CASCADE,
-#                                related_name='graded_assignments', blank=True)
-#     comment = models.TextField(blank=True)
+class StudentAssignment(models.Model):
+    assignment = models.ForeignKey(Assignment,
+                                   on_delete=models.CASCADE,
+                                   related_name='student_assignments')
+    student = models.ForeignKey(User, on_delete=models.CASCADE,
+                                related_name='student_assignments')
+    qr_code = models.CharField(max_length=100)
+    completed = models.BooleanField(default=False)
+    points_earned = models.PositiveSmallIntegerField()
+    timestamp = models.DateTimeField(auto_now=True)
+    grader = models.ForeignKey(User, on_delete=models.CASCADE,
+                               related_name='graded_assignments', blank=True)
+    comment = models.TextField(blank=True)
