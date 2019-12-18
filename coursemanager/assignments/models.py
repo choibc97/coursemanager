@@ -47,14 +47,15 @@ class StudentAssignment(models.Model):
     completed = models.BooleanField(default=False)
     points_earned = models.FloatField(default=0)
     timestamp = models.DateTimeField(auto_now=True)
+    is_late = models.BooleanField(default=False)
     grader = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='graded_assignments', blank=True,
                                null=True)
     comment = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['assignment__due_date',
-                    'assignment__points', 'assignment__title']
+        ordering = ['assignment__due_date', 'assignment__points',
+                    'assignment__title', 'student__email']
         unique_together = [['assignment', 'student']]
 
     def __str__(self):

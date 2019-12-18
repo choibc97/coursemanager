@@ -7,7 +7,8 @@ import {
   makePathArray,
   makePathString,
   capitalize,
-  pathExclusions
+  pathExclusions,
+  lowercasePaths
 } from "../../actions/utility";
 
 export default class Breadcrumbs extends Component {
@@ -23,10 +24,10 @@ export default class Breadcrumbs extends Component {
         {pathArray.map((path, i, arr) => (
           <Breadcrumb.Item
             key={path}
-            active={pathExclusions.has(path) || i === pathArray.length - 1}
+            active={pathExclusions.has(path) || i === arr.length - 1}
             href={makePathString(arr, i)}
           >
-            {capitalize(path)}
+            {lowercasePaths.has(path) ? path : capitalize(path)}
           </Breadcrumb.Item>
         ))}
       </Breadcrumb>

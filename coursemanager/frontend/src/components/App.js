@@ -30,6 +30,8 @@ import EditCourse from "./courses/EditCourse";
 // assignments stuff
 import AssignmentGroup from "./assignments/AssignmentGroup";
 import EditAssignmentGroup from "./assignments/EditAssignmentGroup";
+import InstructorAssignmentView from "./assignments/InstructorAssignmentView";
+import StudentAssignmentView from "./assignments/StudentAssignmentView";
 
 import Container from "react-bootstrap/Container";
 
@@ -95,6 +97,16 @@ class App extends Component {
                     exact
                     path="/courses/:course/assignments/:group/edit"
                     component={EditAssignmentGroup}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/courses/:course/assignments/:group/assignment/:assignment/iview"
+                    component={InstructorAssignmentView}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/courses/:course/assignments/:group/assignment/:assignment/sview"
+                    component={StudentAssignmentView}
                   />
                 </Switch>
               </Container>

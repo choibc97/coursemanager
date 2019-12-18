@@ -84,28 +84,32 @@ export class Courses extends Component {
               </ListGroup.Item>
             ))}
             {taCourses.map(course => (
-              <Row key={course.id}>
-                <Col className="col-auto mr-auto">
-                  <Link to={`/courses/${course.id}/view`}>
-                    <p>{`${course.course_id}: ${course.title}`}</p>
-                  </Link>
-                </Col>
-                <Col className="col-auto">
-                  <p>TA</p>
-                </Col>
-              </Row>
+              <ListGroup.Item key={course.id}>
+                <Row>
+                  <Col className="col-auto mr-auto">
+                    <Link to={`/courses/${course.id}/view`}>
+                      <p>{`${course.course_id}: ${course.title}`}</p>
+                    </Link>
+                  </Col>
+                  <Col className="col-auto">
+                    <p>TA</p>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
             ))}
             {studentCourses.map(course => (
-              <Row key={course.id}>
-                <Col className="col-auto mr-auto">
-                  <Link to={`/courses/${course.id}/view`}>
-                    <p>{`${course.course_id}: ${course.title}`}</p>
-                  </Link>
-                </Col>
-                <Col className="col-auto">
-                  <p>Student</p>
-                </Col>
-              </Row>
+              <ListGroup.Item key={course.id}>
+                <Row>
+                  <Col className="col-auto mr-auto">
+                    <Link to={`/courses/${course.id}/view`}>
+                      <p>{`${course.course_id}: ${course.title}`}</p>
+                    </Link>
+                  </Col>
+                  <Col className="col-auto">
+                    <p>Student</p>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
             ))}
           </ListGroup>
         )}

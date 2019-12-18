@@ -24,7 +24,6 @@ import { timestampToString } from "../../actions/utility";
 
 export class AssignmentGroup extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
     instructorCourses: PropTypes.object.isRequired,
     taCourses: PropTypes.object.isRequired,
     studentCourses: PropTypes.object.isRequired,
@@ -199,9 +198,9 @@ export class AssignmentGroup extends Component {
         </Row>
         <Row>
           <Col>
-            <h3 className="text-warning">
+            <h4 className="text-warning">
               Total Points: {this.props.assignmentGroup.points}
-            </h3>
+            </h4>
           </Col>
         </Row>
         <Row>
@@ -210,7 +209,7 @@ export class AssignmentGroup extends Component {
         {this.props.assignments.length === 0 ? (
           <Row>
             <Col>
-              <p className="text-center">Assignments will appear here.</p>
+              <p className="text-center">Assignment groups will appear here.</p>
             </Col>
           </Row>
         ) : (
@@ -236,7 +235,7 @@ export class AssignmentGroup extends Component {
                       to={
                         isStudent
                           ? `/courses/${courseId}/assignments/${groupId}/assignment/${assignment.id}/sview`
-                          : `/courses/${courseId}/assignments/${groupId}/assignment/${assignment.id}/ivew`
+                          : `/courses/${courseId}/assignments/${groupId}/assignment/${assignment.id}/iview`
                       }
                     >
                       <p>{assignment.title}</p>
@@ -259,7 +258,6 @@ export class AssignmentGroup extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   instructorCourses: new Map(
     state.courses.instructorCourses.map(course => [`${course.id}`, course])
   ),

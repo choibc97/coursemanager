@@ -4,7 +4,11 @@ import {
   EDIT_ASSIGNMENT_GROUP,
   GET_ASSIGNMENT_GROUPS,
   GET_ASSIGNMENT_GROUP,
-  CREATE_ASSIGNMENT
+  CREATE_ASSIGNMENT,
+  DELETE_ASSIGNMENT,
+  GET_ASSIGNMENT,
+  GET_STUDENT_ASSIGNMENT,
+  EDIT_STUDENT_ASSIGNMENT
 } from "../actions/types";
 import {
   sortAssignmentGroupByPoints,
@@ -15,7 +19,9 @@ const initialState = {
   assignmentGroups: [],
   assignmentGroup: null,
   assignments: [],
-  assignment: null
+  assignment: null,
+  studentAssignments: [],
+  studentAssignment: null
 };
 
 export default function(state = initialState, action) {
@@ -65,6 +71,32 @@ export default function(state = initialState, action) {
           sortAssignmentsByDueDate
         ),
         assignment: action.payload
+      };
+    case DELETE_ASSIGNMENT:
+      return {
+        ...state,
+        assignments: state.assignments.filter(
+          assignment => assignment.id != action.payload
+        ),
+        assignment: null,
+        studentAssignments: []
+      };
+    case GET_ASSIGNMENT:
+      return {
+        ...state,
+        assignment: action.payload.assignment,
+        studentAssignments: action.payload.student_assignments
+      };
+    case GET_STUDENT_ASSIGNMENT:
+      return {
+        ...state,
+        studentAssignment: action.payload.student_assignment,
+        assignment: action.payload.assignment
+      };
+    case EDIT_STUDENT_ASSIGNMENT:
+      return {
+        ...state,
+        studentAssignment: action.payload
       };
     default:
       return state;

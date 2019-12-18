@@ -7,7 +7,11 @@ import {
   EDIT_ASSIGNMENT_GROUP,
   GET_ASSIGNMENT_GROUPS,
   GET_ASSIGNMENT_GROUP,
-  CREATE_ASSIGNMENT
+  CREATE_ASSIGNMENT,
+  DELETE_ASSIGNMENT,
+  GET_ASSIGNMENT,
+  GET_STUDENT_ASSIGNMENT,
+  EDIT_STUDENT_ASSIGNMENT
 } from "./types";
 
 // create an assignment group
@@ -128,8 +132,103 @@ export const createAssignment = assignment => (dispatch, getState) => {
     });
 };
 
+// delete an assignment
+export const deleteAssignment = id => (dispatch, getState) => {
+  return axios
+    .delete(`/api/assignments/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: DELETE_ASSIGNMENT,
+        payload: id
+      });
+      dispatch(createMessage({ deleteAssignment: "Assignment deleted" }));
+      return id;
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
+    });
+};
+
+// get an assignment
+export const getAssignment = id => (dispatch, getState) => {
+  axios
+    .get(`/api/assignments/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_ASSIGNMENT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+// get a student assignment by the email and assignment number
+export const getStudentAssignment = (student, assignment) => (
+  dispatch,
+  getState
+) => {
+  axios
+    .get(
+      "/api/student_assignments",
+      addStudentAndAssignmentToConfig(
+        tokenConfig(getState),
+        student,
+        assignment
+      )
+    )
+    .then(res => {
+      dispatch({
+        type: GET_STUDENT_ASSIGNMENT,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+// update a student assignment by the email and assignment number
+export const editStudentAssignment = (student, assignment) => (
+  dispatch,
+  getState
+) => {
+  return axios
+    .patch(
+      "/api/student_assignments",
+      addStudentAndAssignmentToConfig(
+        tokenConfig(getState),
+        student,
+        assignment
+      )
+    )
+    .then(res => {
+      dispatch({
+        type: EDIT_STUDENT_ASSIGNMENT,
+        payload: res.data
+      });
+      return res.data;
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
+    });
+};
+
 // adds the given course to the given config as a param
 export const addCourseToConfig = (config, course) => {
   config.params = { course };
+  return config;
+};
+
+// adds the given assignment and student to the given config as a param
+export const addStudentAndAssignmentToConfig = (
+  config,
+  student,
+  assignment
+) => {
+  config.params = { student, assignment };
   return config;
 };

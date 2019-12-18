@@ -92,7 +92,7 @@ export class CourseAssignments extends Component {
     );
 
     return (
-      <Container>
+      <Container className="mt-3">
         <Row>
           <Col>
             {isInstructor ? (

@@ -4,8 +4,12 @@ export const pathExclusions = new Set([
   "edit",
   "iview",
   "sview",
-  "assignments"
+  "assignments",
+  "assignment"
 ]);
+
+// create a set of paths to not capitalize
+export const lowercasePaths = new Set(["view", "edit", "iview", "sview"]);
 
 // capitalize the first letter in a word
 export const capitalize = word => {
@@ -24,6 +28,8 @@ export const makePathString = (pathArray, i) => {
   const pathString = "/#/" + pathArray.slice(0, i + 1).join("/");
   if (pathString === "/#/courses") {
     return pathString;
+  } else if (i == pathArray.length - 2) {
+    return pathString + "/" + pathArray[i + 1];
   } else {
     return pathString + "/view";
   }
