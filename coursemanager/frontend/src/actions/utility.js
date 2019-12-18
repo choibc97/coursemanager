@@ -1,3 +1,35 @@
+// create a set of path exclusions
+export const pathExclusions = new Set([
+  "view",
+  "edit",
+  "iview",
+  "sview",
+  "assignments"
+]);
+
+// capitalize the first letter in a word
+export const capitalize = word => {
+  return word[0].toUpperCase() + word.slice(1);
+};
+
+// takes in a path string and turns it into an array
+// filters out path exclusions and capitalizes the first letter
+export const makePathArray = pathString => {
+  return pathString.split("/").filter(Boolean);
+};
+
+// takes in a path array and an index i
+// returns a path up to i inclusive
+export const makePathString = (pathArray, i) => {
+  const pathString = "/#/" + pathArray.slice(0, i + 1).join("/");
+  if (pathString === "/#/courses") {
+    return pathString;
+  } else {
+    return pathString + "/view";
+  }
+};
+
+// make string from timestamp
 export const timestampToString = timestamp => {
   const month = timestamp.getUTCMonth() + 1;
   const date = timestamp.getUTCDate();

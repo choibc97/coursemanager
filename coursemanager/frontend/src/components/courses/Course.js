@@ -16,6 +16,7 @@ import CourseAssignments from "./CourseAssignments";
 import CourseInstructors from "./CourseInstructors";
 import CourseTAs from "./CourseTAs";
 import CourseStudents from "./CourseStudents";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 import { deleteCourse } from "../../actions/courses";
 
@@ -82,6 +83,7 @@ export class Course extends Component {
 
     return (
       <Container>
+        <Breadcrumbs path={this.props.location.pathname} />
         <ConfirmModal
           show={this.state.showConfirmModal}
           msg="Are you sure you want to delete this course?"

@@ -13,6 +13,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 import Loader from "../common/Loader";
 import ConfirmModal from "../common/ConfirmModal";
+import Breadcrumbs from "../layout/Breadcrumbs";
 
 import {
   getAssignmentGroup,
@@ -169,6 +170,7 @@ export class AssignmentGroup extends Component {
 
     return (
       <Container>
+        <Breadcrumbs path={this.props.location.pathname} />
         <ConfirmModal
           show={this.state.showConfirmModal}
           msg="Are you sure you want to delete this assignment group and all of its corresponding assignments?"
