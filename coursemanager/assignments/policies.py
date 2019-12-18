@@ -2,7 +2,7 @@ from rest_access_policy import AccessPolicy
 from courses.models import Course
 
 
-class AssignmentGroupAccessPolicy(AccessPolicy):
+class AssignmentAccessPolicy(AccessPolicy):
     statements = [
         {
             'action': '*',
@@ -15,6 +15,18 @@ class AssignmentGroupAccessPolicy(AccessPolicy):
             'principal': 'authenticated',
             'effect': 'allow',
             'condition': 'is_staff'
+        },
+        {
+            'action': ['list', 'retrieve'],
+            'principal': 'authenticated',
+            'effect': 'allow',
+            'condition': 'is_ta'
+        },
+        {
+            'action': ['list', 'retrieve'],
+            'principal': 'authenticated',
+            'effect': 'allow',
+            'condition': 'is_student'
         }
     ]
 
@@ -26,6 +38,14 @@ class AssignmentGroupAccessPolicy(AccessPolicy):
             course = Course.objects.get(request.data['course'])
             return course.instructors.filter(email=request.user.email).exists()
         else:
-            assignment_group = view.get_object()
-            return assignment_group.course.instructors.filter(
+            instance = view.get_object()
+            return instance.course.instructors.filter(
                 email=request.user.email).exists()
+
+    def is_ta(self, request, view, action):
+        instance = view.get_object()
+        return instance.course.tas.filter(email=request.user.email).exists()
+
+    def is_student(self, request, view, action):
+        instance = view.get_object()
+        return instance.course.students.filter(email=request.user.email).exists()

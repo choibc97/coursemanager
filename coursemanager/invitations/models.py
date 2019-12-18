@@ -19,5 +19,8 @@ class RegisterInvitation(models.Model):
     token = models.CharField(
         max_length=50, default=get_token)
 
+    class Meta:
+        ordering = ['recipient__email']
+
     def __str__(self):
         return self.recipient.email

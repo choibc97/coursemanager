@@ -14,5 +14,8 @@ class Course(models.Model):
     students = models.ManyToManyField(
         User, related_name='student_courses', blank=True)
 
+    class Meta:
+        ordering = ['course_id']
+
     def __str__(self):
         return f'{self.course_id}: {self.title}'

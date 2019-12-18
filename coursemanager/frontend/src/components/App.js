@@ -27,6 +27,9 @@ import CreateCourse from "./courses/CreateCourse";
 import Course from "./courses/Course";
 import EditCourse from "./courses/EditCourse";
 
+// assignments stuff
+import AssignmentGroup from "./assignments/AssignmentGroup";
+
 import Container from "react-bootstrap/Container";
 
 import { Provider } from "react-redux";
@@ -79,6 +82,13 @@ class App extends Component {
                     exact
                     path="/courses/:course/edit"
                     component={EditCourse}
+                  />
+
+                  {/* assignments stuff */}
+                  <PrivateRoute
+                    exact
+                    path="/courses/:course/assignments/:group/view"
+                    component={AssignmentGroup}
                   />
                 </Switch>
               </Container>

@@ -1,7 +1,11 @@
 import axios from "axios";
 import { returnErrors, createMessage } from "./messages";
 import { tokenConfig } from "./auth";
-import { CREATE_ASSIGNMENT_GROUP, GET_ASSIGNMENT_GROUPS } from "./types";
+import {
+  CREATE_ASSIGNMENT_GROUP,
+  GET_ASSIGNMENT_GROUPS,
+  GET_ASSIGNMENT_GROUP
+} from "./types";
 
 // create an assignment group
 export const createAssignmentGroup = assignmentGroup => (
@@ -36,6 +40,20 @@ export const getAssignmentGroups = course => (dispatch, getState) => {
     .then(res => {
       dispatch({
         type: GET_ASSIGNMENT_GROUPS,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+export const getAssignmentGroup = id => (dispatch, getState) => {
+  axios
+    .get(`/api/assignment_groups/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: GET_ASSIGNMENT_GROUP,
         payload: res.data
       });
     })

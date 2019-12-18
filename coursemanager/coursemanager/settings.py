@@ -108,7 +108,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'masters',
         'USER': 'django',
-        'PASSWORD': 'unchained',
+        'PASSWORD': POSTGRES_PASSWORD,  # from secrets.py
         'HOST': 'localhost',
         'PORT': ''
     }

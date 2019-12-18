@@ -81,7 +81,7 @@ export class Courses extends Component {
                 to={`/courses/${course.id}/view`}
               >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
-            <Col>TA</Col>
+            <Col className="col-auto">TA</Col>
           </Row>
         ))}
         {studentCourses.map(course => (
@@ -91,7 +91,7 @@ export class Courses extends Component {
                 to={`/courses/${course.id}/view`}
               >{`${course.course_id}: ${course.title}`}</Link>
             </Col>
-            <Col>Student</Col>
+            <Col className="col-auto">Student</Col>
           </Row>
         ))}
       </Container>

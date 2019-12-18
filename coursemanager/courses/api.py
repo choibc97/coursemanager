@@ -43,6 +43,6 @@ class CourseViewSet(viewsets.ModelViewSet):
                 register_serializer.save()
 
     def get_queryset(self):
-        queryset = Course.objects.all().order_by('course_id')
+        queryset = Course.objects.all()
         queryset = self.get_serializer_class().setup_eager_loading(queryset)
         return queryset

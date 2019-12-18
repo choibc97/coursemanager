@@ -11,7 +11,9 @@ class AssignmentGroup(models.Model):
         Course, on_delete=models.CASCADE, related_name='assignment_groups')
     title = models.CharField(max_length=100, unique=True)
     points = models.PositiveSmallIntegerField()
-    due_date = models.DateTimeField()
+
+    class Meta:
+        ordering = ['points', 'title']
 
     def __str__(self):
         return f'{self.course.course_id}: {self.title}'
@@ -25,6 +27,9 @@ class Assignment(models.Model):
     title = models.CharField(max_length=100, unique=True)
     points = models.PositiveSmallIntegerField()
     due_date = models.DateTimeField()
+
+    class Meta:
+        ordering = ['due_date', 'points', 'title']
 
     def __str__(self):
         return f'{self.course.course_id} {self.group.title} {self.title}'
@@ -43,3 +48,11 @@ class StudentAssignment(models.Model):
     grader = models.ForeignKey(User, on_delete=models.CASCADE,
                                related_name='graded_assignments', blank=True)
     comment = models.TextField(blank=True)
+
+    class Meta:
+        unique_together = [['assignment', 'student']]
+        ordering = ['assignment__due_date',
+                    'assignment__points', 'assignment__title']
+
+    def __str__(self):
+        return f'{assignment.title}'
