@@ -3,8 +3,10 @@ import { returnErrors, createMessage } from "./messages";
 import { tokenConfig } from "./auth";
 import {
   CREATE_ASSIGNMENT_GROUP,
+  DELETE_ASSIGNMENT_GROUP,
   GET_ASSIGNMENT_GROUPS,
-  GET_ASSIGNMENT_GROUP
+  GET_ASSIGNMENT_GROUP,
+  CREATE_ASSIGNMENT
 } from "./types";
 
 // create an assignment group
@@ -30,6 +32,26 @@ export const createAssignmentGroup = assignmentGroup => (
     });
 };
 
+// delete an assignment group
+export const deleteAssignmentGroup = id => (dispatch, getState) => {
+  return axios
+    .delete(`/api/assignment_groups/${id}/`, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: DELETE_ASSIGNMENT_GROUP,
+        payload: id
+      });
+      dispatch(
+        createMessage({ deleteAssignmentGroup: "Assignment group deleted" })
+      );
+      return id;
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
+    });
+};
+
 // get assignment groups for a course
 export const getAssignmentGroups = course => (dispatch, getState) => {
   axios
@@ -48,6 +70,7 @@ export const getAssignmentGroups = course => (dispatch, getState) => {
     });
 };
 
+// get a given assignment group
 export const getAssignmentGroup = id => (dispatch, getState) => {
   axios
     .get(`/api/assignment_groups/${id}/`, tokenConfig(getState))
@@ -59,6 +82,24 @@ export const getAssignmentGroup = id => (dispatch, getState) => {
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
+    });
+};
+
+// create an assignment
+export const createAssignment = assignment => (dispatch, getState) => {
+  return axios
+    .post("/api/assignments/", assignment, tokenConfig(getState))
+    .then(res => {
+      dispatch({
+        type: CREATE_ASSIGNMENT,
+        payload: res.data
+      });
+      dispatch(createMessage({ createAssignment: "Assignment created" }));
+      return res.data;
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
     });
 };
 

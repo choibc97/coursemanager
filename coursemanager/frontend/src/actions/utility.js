@@ -17,3 +17,13 @@ export const sortAssignmentGroupByPoints = (groupA, groupB) => {
   else if (groupA.points === groupB.points) return 0;
   else return 1;
 };
+
+// sort 2 assignments by their due dates
+// will return -1 if assignmentA < assignmentB
+// 0 if assignmentA === assignmentB
+// 1 if assignmentA > assignmentB
+export const sortAssignmentsByDueDate = (assignmentA, assignmentB) => {
+  if (assignmentA.due_date < assignmentB.due_date) return -1;
+  else if (assignmentA.due_date === assignmentB.due_date) return 0;
+  else return 1;
+};

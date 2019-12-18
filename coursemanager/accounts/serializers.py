@@ -3,6 +3,7 @@ from django.core import exceptions
 from rest_framework import serializers
 from .models import User
 from invitations.serializers import RegisterInvitationSerializer
+from assignments.serializers import StudentAssignmentSerializer
 
 
 # user serializer

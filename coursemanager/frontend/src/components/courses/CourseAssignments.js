@@ -25,8 +25,7 @@ export class CourseAssignments extends Component {
 
   state = {
     title: "",
-    points: "",
-    dueDate: ""
+    points: ""
   };
 
   componentDidMount() {
@@ -42,15 +41,13 @@ export class CourseAssignments extends Component {
 
     const course = this.props.course.id;
     const { title, points } = this.state;
-    const due_date = this.state.dueDate;
 
-    const assignmentGroup = { course, title, points, due_date };
+    const assignmentGroup = { course, title, points };
     this.props.createAssignmentGroup(assignmentGroup).then(res => {
       if (res) {
         this.setState({
           title: "",
-          points: "",
-          dueDate: ""
+          points: ""
         });
       }
     });
@@ -84,15 +81,6 @@ export class CourseAssignments extends Component {
               placeholder="10"
               min="0"
               max="32767"
-            />
-          </Form.Group>
-          <Form.Group as={Col} className="col-auto">
-            <Form.Label>Due Date</Form.Label>
-            <Form.Control
-              onChange={this.onChange}
-              type="datetime-local"
-              name="dueDate"
-              value={this.state.dueDate}
             />
           </Form.Group>
           <Form.Group as={Col} className="col-auto ml-auto align-self-end">
