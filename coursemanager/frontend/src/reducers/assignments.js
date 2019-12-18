@@ -1,6 +1,7 @@
 import {
   CREATE_ASSIGNMENT_GROUP,
   DELETE_ASSIGNMENT_GROUP,
+  EDIT_ASSIGNMENT_GROUP,
   GET_ASSIGNMENT_GROUPS,
   GET_ASSIGNMENT_GROUP,
   CREATE_ASSIGNMENT
@@ -24,7 +25,8 @@ export default function(state = initialState, action) {
         ...state,
         assignmentGroups: [action.payload, ...state.assignmentGroups]
           .sort(sortAssignmentGroupByPoints)
-          .reverse()
+          .reverse(),
+        assignmentGroup: action.payload
       };
     case DELETE_ASSIGNMENT_GROUP:
       return {
@@ -34,6 +36,16 @@ export default function(state = initialState, action) {
         ),
         assignmentGroup: null,
         assignments: []
+      };
+    case EDIT_ASSIGNMENT_GROUP:
+      return {
+        ...state,
+        assignmentGroups: state.assignmentGroups
+          .map(group =>
+            group.id === action.payload.id ? action.payload : group
+          )
+          .sort(sortAssignmentGroupByPoints),
+        assignmentGroup: action.payload
       };
     case GET_ASSIGNMENT_GROUPS:
       return {

@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 
 import { editCourse } from "../../actions/courses";
 
@@ -35,7 +36,11 @@ export class CourseInstructors extends Component {
     ];
 
     const course = { id, instructors };
-    this.props.editCourse(course);
+    this.props.editCourse(course).then(res => {
+      if (res) {
+        this.setState({ instructors: "" });
+      }
+    });
   };
 
   render() {
@@ -65,7 +70,7 @@ export class CourseInstructors extends Component {
     );
 
     return (
-      <Container>
+      <Container className="mt-3">
         <Row>
           <Col>{isInstructor ? addForm : null}</Col>
         </Row>
@@ -75,15 +80,34 @@ export class CourseInstructors extends Component {
               <p className="text-center">Instructors will appear here.</p>
             </Col>
           </Row>
-        ) : null}
-        {this.props.course.instructors.map(instructor => (
-          <Row key={instructor.email}>
-            <Col className="col-auto mr-auto">{`${instructor.first_name} ${instructor.last_name}`}</Col>
-            <Col className="col-auto">
-              <a href={`mailto:${instructor.email}`}>{instructor.email}</a>
-            </Col>
-          </Row>
-        ))}
+        ) : (
+          <ListGroup>
+            <ListGroup.Item>
+              <Row>
+                <Col className="col-auto mr-auto">
+                  <h4 className="text-info">Name</h4>
+                </Col>
+                <Col className="col-auto">
+                  <h4 className="text-info">Email</h4>
+                </Col>
+              </Row>
+            </ListGroup.Item>
+            {this.props.course.instructors.map(instructor => (
+              <ListGroup.Item key={instructor.email}>
+                <Row>
+                  <Col className="col-auto mr-auto">
+                    <p>{`${instructor.first_name} ${instructor.last_name}`}</p>
+                  </Col>
+                  <Col className="col-auto">
+                    <a href={`mailto:${instructor.email}`}>
+                      <p>{instructor.email}</p>
+                    </a>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
       </Container>
     );
   }

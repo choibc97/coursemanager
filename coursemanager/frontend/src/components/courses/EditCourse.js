@@ -87,7 +87,6 @@ export class EditCourse extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.auth.user,
   instructorCourses: new Map(
     state.courses.instructorCourses.map(course => [`${course.id}`, course])
   )

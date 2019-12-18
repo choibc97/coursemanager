@@ -4,6 +4,7 @@ import { tokenConfig } from "./auth";
 import {
   CREATE_ASSIGNMENT_GROUP,
   DELETE_ASSIGNMENT_GROUP,
+  EDIT_ASSIGNMENT_GROUP,
   GET_ASSIGNMENT_GROUPS,
   GET_ASSIGNMENT_GROUP,
   CREATE_ASSIGNMENT
@@ -45,6 +46,30 @@ export const deleteAssignmentGroup = id => (dispatch, getState) => {
         createMessage({ deleteAssignmentGroup: "Assignment group deleted" })
       );
       return id;
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
+    });
+};
+
+// edit an assignment group
+export const editAssignmentGroup = assignmentGroup => (dispatch, getState) => {
+  return axios
+    .patch(
+      `/api/assignment_groups/${assignmentGroup.id}/`,
+      assignmentGroup,
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch({
+        type: EDIT_ASSIGNMENT_GROUP,
+        payload: res.data
+      });
+      dispatch(
+        createMessage({ editAssignmentGroup: "Assignment group edited" })
+      );
+      return res.data;
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));

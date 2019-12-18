@@ -7,6 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 
 import { editCourse } from "../../actions/courses";
 
@@ -35,7 +36,11 @@ export class CourseTAs extends Component {
     ];
 
     const course = { id, tas };
-    this.props.editCourse(course);
+    this.props.editCourse(course).then(res => {
+      if (res) {
+        this.setState({ tas: "" });
+      }
+    });
   };
 
   render() {
@@ -65,7 +70,7 @@ export class CourseTAs extends Component {
     );
 
     return (
-      <Container>
+      <Container className="mt-3">
         <Row>
           <Col>{isInstructor ? addForm : null}</Col>
         </Row>
@@ -75,15 +80,34 @@ export class CourseTAs extends Component {
               <p className="text-center">TAs will appear here.</p>
             </Col>
           </Row>
-        ) : null}
-        {this.props.course.tas.map(ta => (
-          <Row key={ta.email}>
-            <Col className="col-auto mr-auto">{`${ta.first_name} ${ta.last_name}`}</Col>
-            <Col className="col-auto">
-              <a href={`mailto:${ta.email}`}>{ta.email}</a>
-            </Col>
-          </Row>
-        ))}
+        ) : (
+          <ListGroup>
+            <ListGroup.Item>
+              <Row>
+                <Col className="col-auto mr-auto">
+                  <h4 className="text-info">Name</h4>
+                </Col>
+                <Col className="col-auto">
+                  <h4 className="text-info">Email</h4>
+                </Col>
+              </Row>
+            </ListGroup.Item>
+            {this.props.course.tas.map(ta => (
+              <ListGroup.Item key={ta.email}>
+                <Row>
+                  <Col className="col-auto mr-auto">
+                    <p>{`${ta.first_name} ${ta.last_name}`}</p>
+                  </Col>
+                  <Col className="col-auto">
+                    <a href={`mailto:${ta.email}`}>
+                      <p>{ta.email}</p>
+                    </a>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        )}
       </Container>
     );
   }

@@ -8,6 +8,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 
 import {
   createAssignmentGroup,
@@ -78,7 +79,7 @@ export class CourseAssignments extends Component {
               type="number"
               name="points"
               value={this.state.points}
-              placeholder="10"
+              placeholder="30"
               min="0"
               max="32767"
             />
@@ -108,27 +109,35 @@ export class CourseAssignments extends Component {
             </Col>
           </Row>
         ) : (
-          <Row>
-            <Col className="col-auto mr-auto">
-              <h4>Assignment Group</h4>
-            </Col>
-            <Col className="col-auto">
-              <h4>Total Points</h4>
-            </Col>
-          </Row>
+          <ListGroup>
+            <ListGroup.Item>
+              <Row>
+                <Col className="col-auto mr-auto">
+                  <h4 className="text-info">Assignment Group</h4>
+                </Col>
+                <Col className="col-auto">
+                  <h4 className="text-info">Total Points</h4>
+                </Col>
+              </Row>
+            </ListGroup.Item>
+            {this.props.assignmentGroups.map(group => (
+              <ListGroup.Item key={group.id}>
+                <Row>
+                  <Col className="col-auto mr-auto">
+                    <Link
+                      to={`/courses/${this.props.course.id}/assignments/${group.id}/view`}
+                    >
+                      <p>{group.title}</p>
+                    </Link>
+                  </Col>
+                  <Col className="col-auto">
+                    <p>{group.points}</p>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         )}
-        {this.props.assignmentGroups.map(group => (
-          <Row key={group.id}>
-            <Col className="col-auto mr-auto">
-              <Link
-                to={`/courses/${this.props.course.id}/assignments/${group.id}/view`}
-              >
-                {group.title}
-              </Link>
-            </Col>
-            <Col className="col-auto">{group.points}</Col>
-          </Row>
-        ))}
       </Container>
     );
   }

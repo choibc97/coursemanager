@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 
 import Loader from "../common/Loader";
 import ConfirmModal from "../common/ConfirmModal";
@@ -18,6 +19,7 @@ import {
   deleteAssignmentGroup,
   createAssignment
 } from "../../actions/assignments";
+import { timestampToString } from "../../actions/utility";
 
 export class AssignmentGroup extends Component {
   static propTypes = {
@@ -150,7 +152,7 @@ export class AssignmentGroup extends Component {
             />
           </Form.Group>
           <Form.Group as={Col} className="col-auto">
-            <Form.Label>Due Date</Form.Label>
+            <Form.Label>Due Date (in CT)</Form.Label>
             <Form.Control
               onChange={this.onChange}
               type="datetime-local"
@@ -194,6 +196,13 @@ export class AssignmentGroup extends Component {
           ) : null}
         </Row>
         <Row>
+          <Col>
+            <h3 className="text-warning">
+              Total Points: {this.props.assignmentGroup.points}
+            </h3>
+          </Col>
+        </Row>
+        <Row>
           <Col>{isInstructor ? addForm : null}</Col>
         </Row>
         {this.props.assignments.length === 0 ? (
@@ -203,17 +212,45 @@ export class AssignmentGroup extends Component {
             </Col>
           </Row>
         ) : (
-          <Row>
-            <Col className="col-auto mr-auto">Assignment</Col>
-            <Col className="col-auto">Points</Col>
-          </Row>
+          <ListGroup>
+            <ListGroup.Item>
+              <Row>
+                <Col className="col-4">
+                  <h4 className="text-info">Assignment</h4>
+                </Col>
+                <Col className="col-4 mr-auto">
+                  <h4 className="text-info">Due Date</h4>
+                </Col>
+                <Col className="col-auto">
+                  <h4 className="text-info">Points</h4>
+                </Col>
+              </Row>
+            </ListGroup.Item>
+            {this.props.assignments.map(assignment => (
+              <ListGroup.Item key={assignment.id}>
+                <Row key={assignment.id}>
+                  <Col className="col-4">
+                    <Link
+                      to={
+                        isStudent
+                          ? `/courses/${courseId}/assignments/${groupId}/assignment/${assignment.id}/sview`
+                          : `/courses/${courseId}/assignments/${groupId}/assignment/${assignment.id}/ivew`
+                      }
+                    >
+                      <p>{assignment.title}</p>
+                    </Link>
+                  </Col>
+                  <Col className="col-4 mr-auto">
+                    <p>{timestampToString(new Date(assignment.due_date))}</p>
+                  </Col>
+                  <Col className="col-auto">
+                    <p>{assignment.points}</p>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
         )}
-        {this.props.assignments.map(assignment => (
-          <Row key={assignment.id}>
-            <Col className="col-auto mr-auto">{assignment.title}</Col>
-            <Col className="col-auto">{assignment.points}</Col>
-          </Row>
-        ))}
       </Container>
     );
   }

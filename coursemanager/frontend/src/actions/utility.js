@@ -1,3 +1,12 @@
+export const timestampToString = timestamp => {
+  const month = timestamp.getUTCMonth() + 1;
+  const date = timestamp.getUTCDate();
+  const hours = timestamp.getUTCHours();
+  const minutes = timestamp.getUTCMinutes();
+
+  return `${month}/${date} @ ${hours}:${minutes} CT`;
+};
+
 // sort 2 courses by their course id
 // will return -1 if courseA < courseB
 // 0 if courseA === courseB

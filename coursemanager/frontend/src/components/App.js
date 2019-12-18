@@ -29,6 +29,7 @@ import EditCourse from "./courses/EditCourse";
 
 // assignments stuff
 import AssignmentGroup from "./assignments/AssignmentGroup";
+import EditAssignmentGroup from "./assignments/EditAssignmentGroup";
 
 import Container from "react-bootstrap/Container";
 
@@ -89,6 +90,11 @@ class App extends Component {
                     exact
                     path="/courses/:course/assignments/:group/view"
                     component={AssignmentGroup}
+                  />
+                  <PrivateRoute
+                    exact
+                    path="/courses/:course/assignments/:group/edit"
+                    component={EditAssignmentGroup}
                   />
                 </Switch>
               </Container>
