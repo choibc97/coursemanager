@@ -35,13 +35,15 @@ export class StudentAssignmentView extends Component {
     const isStudent = this.props.studentCourses.has(courseId);
 
     if (!isStudent) {
-      <Container>
-        <p className="text-center">
-          This assignment either does not exist or you do not have permission to
-          access it. Please contact the sys admin if you believe this is a
-          mistake.
-        </p>
-      </Container>;
+      return (
+        <Container>
+          <p className="text-center">
+            This assignment either does not exist or you do not have permission
+            to access it. Please contact the sys admin if you believe this is a
+            mistake.
+          </p>
+        </Container>
+      );
     }
 
     if (this.props.studentAssignment === null) {
