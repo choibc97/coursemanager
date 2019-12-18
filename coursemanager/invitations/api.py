@@ -4,8 +4,6 @@ from knox.models import AuthToken
 from .models import RegisterInvitation
 from .serializers import RegisterInvitationSerializer
 
-import datetime
-
 
 class RegisterInvitationAPI(generics.RetrieveAPIView):
     permission_classes = [

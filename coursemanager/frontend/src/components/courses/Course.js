@@ -14,6 +14,8 @@ import Tab from "react-bootstrap/Tab";
 import ConfirmModal from "../common/ConfirmModal";
 import CourseAssignments from "./CourseAssignments";
 import CourseInstructors from "./CourseInstructors";
+import CourseTAs from "./CourseTAs";
+import CourseStudents from "./CourseStudents";
 
 import { deleteCourse } from "../../actions/courses";
 
@@ -114,9 +116,13 @@ export class Course extends Component {
           <Tab eventKey="instructors" title="Instructors">
             <CourseInstructors course={course} />
           </Tab>
-          <Tab eventKey="tas" title="TAs"></Tab>
+          <Tab eventKey="tas" title="TAs">
+            <CourseTAs course={course} />
+          </Tab>
           {isInstructor || isTa ? (
-            <Tab eventKey="students" title="Students"></Tab>
+            <Tab eventKey="students" title="Students">
+              <CourseStudents course={course} />
+            </Tab>
           ) : null}
         </Tabs>
       </Container>

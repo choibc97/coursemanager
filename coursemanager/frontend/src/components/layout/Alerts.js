@@ -16,20 +16,25 @@ export class Alerts extends Component {
       if (error.status === 401 || error.status === 403)
         alert.error(`${error.msg.detail}`);
       if (error.status === 500)
-        alert.error(
-          "There is a problem with the server, please try again later"
-        );
+        alert.error("There is a problem with your request.");
 
-      if (error.msg.id) alert.error(`ID: ${error.msg.id.join(", ")}`);
-      if (error.msg.title) alert.error(`Title: ${error.msg.title.join(", ")}`);
       if (error.msg.non_field_errors)
         alert.error(`${error.msg.non_field_errors.join(", ")}`);
+      if (error.msg.id) alert.error(`ID: ${error.msg.id.join(", ")}`);
+      if (error.msg.title) alert.error(`Title: ${error.msg.title.join(", ")}`);
+      if (error.msg.first_name)
+        alert.error(`First Name: ${error.msg.first_name.join(", ")}`);
+      if (error.msg.last_name)
+        alert.error(`Last Name: ${error.msg.last_name.join(", ")}`);
+      if (error.msg.password)
+        alert.error(`Password: ${error.msg.password.join(", ")}`);
     }
 
     if (message !== prevProps.message) {
       // errors
       if (message.privateRouteFail) alert.error(message.privateRouteFail);
       if (message.passwordMismatch) alert.error(message.passwordMismatch);
+      if (message.missingName) alert.error(message.missingName);
 
       // successes
       if (message.login) alert.success(message.login);

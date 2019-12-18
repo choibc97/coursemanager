@@ -50,6 +50,10 @@ export class Register extends Component {
 
     if (this.state.password !== this.state.password2) {
       this.props.createMessage({ passwordMismatch: "Passwords do not match" });
+    } else if (!this.state.firstName || !this.state.lastName) {
+      this.props.createMessage({
+        missingName: "Fill out your first and last name"
+      });
     } else {
       const { token } = this.props.match.params;
       this.props.register(
