@@ -116,7 +116,7 @@ export class StudentAssignmentView extends Component {
                 <Row>
                   <Col>
                     <p>{`Graded by ${
-                      studentAssignment.graer
+                      studentAssignment.grader
                     } at ${timestampToString(
                       new Date(studentAssignment.timestamp)
                     )}`}</p>
