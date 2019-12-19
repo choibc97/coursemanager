@@ -12,6 +12,7 @@ import { logout } from "../../actions/auth";
 export class Header extends Component {
   static propTypes = {
     auth: PropTypes.object.isRequired,
+    courses: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired
   };
 
@@ -21,6 +22,10 @@ export class Header extends Component {
     if (!isAuthenticated) {
       return null;
     }
+
+    const { instructorCourses, taCourses } = this.props.courses;
+    const enableCheckout =
+      instructorCourses.length !== 0 || taCourses.length !== 0;
 
     return (
       <Navbar expand="sm">
@@ -32,6 +37,9 @@ export class Header extends Component {
           <Navbar.Collapse>
             <Nav className="mr-auto">
               <Nav.Link href="/#/courses">Courses</Nav.Link>
+              {enableCheckout ? (
+                <Nav.Link href="/#/checkout">Checkout</Nav.Link>
+              ) : null}
               <Nav.Link href="/#/about">About</Nav.Link>
             </Nav>
             <Nav>
@@ -49,7 +57,8 @@ export class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  courses: state.courses
 });
 
 const mapDispatchToProps = { logout };

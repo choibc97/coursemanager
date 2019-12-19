@@ -9,6 +9,7 @@ import {
   GET_ASSIGNMENT_GROUP,
   CREATE_ASSIGNMENT,
   DELETE_ASSIGNMENT,
+  EDIT_ASSIGNMENT,
   GET_ASSIGNMENT,
   GET_STUDENT_ASSIGNMENT,
   EDIT_STUDENT_ASSIGNMENT
@@ -150,6 +151,28 @@ export const deleteAssignment = id => (dispatch, getState) => {
     });
 };
 
+// edit an assignment
+export const editAssignment = assignment => (dispatch, getState) => {
+  return axios
+    .patch(
+      `/api/assignments/${assignment.id}/`,
+      assignment,
+      tokenConfig(getState)
+    )
+    .then(res => {
+      dispatch({
+        type: EDIT_ASSIGNMENT,
+        payload: res.data
+      });
+      dispatch(createMessage({ editAssignment: "Assignment edited" }));
+      return res.data;
+    })
+    .catch(err => {
+      dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
+    });
+};
+
 // get an assignment
 export const getAssignment = id => (dispatch, getState) => {
   axios
@@ -170,7 +193,7 @@ export const getStudentAssignment = (student, assignment) => (
   dispatch,
   getState
 ) => {
-  axios
+  return axios
     .get(
       "/api/student_assignments",
       addStudentAndAssignmentToConfig(
@@ -184,20 +207,24 @@ export const getStudentAssignment = (student, assignment) => (
         type: GET_STUDENT_ASSIGNMENT,
         payload: res.data
       });
+      return res.data;
     })
     .catch(err => {
       dispatch(returnErrors(err.response.data, err.response.status));
+      return null;
     });
 };
 
 // update a student assignment by the email and assignment number
-export const editStudentAssignment = (student, assignment) => (
-  dispatch,
-  getState
-) => {
+export const editStudentAssignment = (
+  student,
+  assignment,
+  studentAssignment
+) => (dispatch, getState) => {
   return axios
     .patch(
       "/api/student_assignments",
+      studentAssignment,
       addStudentAndAssignmentToConfig(
         tokenConfig(getState),
         student,
@@ -209,6 +236,7 @@ export const editStudentAssignment = (student, assignment) => (
         type: EDIT_STUDENT_ASSIGNMENT,
         payload: res.data
       });
+      dispatch(createMessage({ editStudentAssignment: "Checkout successful" }));
       return res.data;
     })
     .catch(err => {

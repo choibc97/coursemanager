@@ -51,6 +51,9 @@ export class Alerts extends Component {
         alert.success(message.editAssignmentGroup);
       if (message.createAssignment) alert.success(message.createAssignment);
       if (message.deleteAssignment) alert.success(message.deleteAssignment);
+      if (message.editAssignment) alert.success(message.editAssignment);
+      if (message.editStudentAssignment)
+        alert.success(message.editStudentAssignment);
     }
   }
 

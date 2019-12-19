@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import AssignmentGroup, Assignment, StudentAssignment
+from django.utils import timezone
 
 
 class AssignmentGroupSerializer(serializers.ModelSerializer):
@@ -51,3 +52,18 @@ class StudentAssignmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = StudentAssignment
         fields = '__all__'
+
+    def update(self, instance, validated_data):
+        assignment = instance.assignment
+        instance.is_late = assignment.due_date < timezone.now()
+        points_earned = validated_data.get(
+            'points_earned', instance.points_earned)
+        instance.points_earned = points_earned if points_earned \
+            <= assignment.points else assignment.points
+        instance.completed = validated_data.get(
+            'completed', instance.completed)
+        instance.grader = validated_data.get('grader', instance.grader)
+        instance.comment = validated_data.get('comment', instance.comment)
+        instance.save()
+
+        return instance

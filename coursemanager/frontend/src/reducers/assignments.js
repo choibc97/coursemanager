@@ -6,6 +6,7 @@ import {
   GET_ASSIGNMENT_GROUP,
   CREATE_ASSIGNMENT,
   DELETE_ASSIGNMENT,
+  EDIT_ASSIGNMENT,
   GET_ASSIGNMENT,
   GET_STUDENT_ASSIGNMENT,
   EDIT_STUDENT_ASSIGNMENT
@@ -80,6 +81,16 @@ export default function(state = initialState, action) {
         ),
         assignment: null,
         studentAssignments: []
+      };
+    case EDIT_ASSIGNMENT:
+      return {
+        ...state,
+        assignment: action.payload,
+        assignments: state.assignments
+          .map(assignment =>
+            assignment.id === action.payload.id ? action.payload : assignment
+          )
+          .sort(sortAssignmentsByDueDate)
       };
     case GET_ASSIGNMENT:
       return {

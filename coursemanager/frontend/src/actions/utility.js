@@ -1,3 +1,12 @@
+// takes in a qr code string and formats it for a request
+export const formatQrString = qr => {
+  const arr = qr.split("_").filter(Boolean);
+  return {
+    student: arr[0],
+    assignment: arr[1]
+  };
+};
+
 // create a set of path exclusions
 export const pathExclusions = new Set([
   "view",

@@ -10,7 +10,6 @@ import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
 import Loader from "../common/Loader";
-import Breadcrumbs from "../layout/Breadcrumbs";
 
 export class Courses extends Component {
   static propTypes = {
@@ -38,7 +37,6 @@ export class Courses extends Component {
 
     return (
       <Container>
-        <Breadcrumbs path={this.props.location.pathname} />
         <Row className="align-items-center mb-3">
           <Col className="col-auto mr-auto">
             <h2>Courses</h2>
