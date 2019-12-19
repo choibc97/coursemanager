@@ -36,7 +36,7 @@ class AssignmentGroupAccessPolicy(AccessPolicy):
 
     def is_instructor(self, request, view, action):
         if action == 'create':
-            course = Course.objects.get(request.data['course'])
+            course = Course.objects.get(id=request.data['course'])
             return course.instructors.filter(email=request.user.email).exists()
         elif action == 'list':
             id = request.query_params.get('course')
@@ -105,7 +105,7 @@ class AssignmentAccessPolicy(AccessPolicy):
 
     def is_instructor(self, request, view, action):
         if action == 'create':
-            course = Course.objects.get(request.data['course'])
+            course = Course.objects.get(id=request.data['course'])
             return course.instructors.filter(email=request.user.email).exists()
         elif action == 'list':
             id = request.query_params.get('course')
