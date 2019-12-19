@@ -27,7 +27,14 @@ export class EditCourse extends Component {
     this.state = {
       edited: null,
       courseId: isInstructor ? course.course_id : "",
-      title: isInstructor ? course.title : ""
+      title: isInstructor ? course.title : "",
+      instructors: isInstructor
+        ? course.instructors.map(instructor => instructor.email).join(",")
+        : "",
+      tas: isInstructor ? course.tas.map(ta => ta.email).join(",") : "",
+      students: isInstructor
+        ? course.students.map(student => student.email).join(",")
+        : ""
     };
   }
 
@@ -39,10 +46,14 @@ export class EditCourse extends Component {
     e.preventDefault();
 
     const id = this.props.match.params.course;
+    const { title, instructors, tas, students } = this.state;
     const course = {
       id,
       course_id: this.state.courseId,
-      title: this.state.title
+      title,
+      instructors: instructors.split(",").filter(Boolean),
+      tas: tas.split(",").filter(Boolean),
+      students: students.split(",").filter(Boolean)
     };
     this.props.editCourse(course).then(res => this.setState({ edited: res }));
   };
@@ -78,6 +89,39 @@ export class EditCourse extends Component {
               name="title"
               value={this.state.title}
               placeholder="Computer Science I"
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Instructor Emails</Form.Label>
+            <Form.Control
+              onChange={this.onChange}
+              type="email"
+              name="instructors"
+              value={this.state.instructors}
+              placeholder="janedoe@wustl.edu, johndoe@wustl.edu"
+              multiple
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>TA Emails</Form.Label>
+            <Form.Control
+              onChange={this.onChange}
+              type="email"
+              name="tas"
+              value={this.state.tas}
+              placeholder="janedoe@wustl.edu, johndoe@wustl.edu"
+              multiple
+            />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Student Emails</Form.Label>
+            <Form.Control
+              onChange={this.onChange}
+              type="email"
+              name="students"
+              value={this.state.students}
+              placeholder="janedoe@wustl.edu, johndoe@wustl.edu"
+              multiple
             />
           </Form.Group>
           <Form.Group>
