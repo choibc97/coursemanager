@@ -12,5 +12,5 @@ class RegisterInvitationAPI(generics.RetrieveAPIView):
     serializer_class = RegisterInvitationSerializer
 
     def get_object(self):
-        token = self.request.query_params['token']
+        token = self.request.query_params.get('token')
         return RegisterInvitation.objects.get(token=token)

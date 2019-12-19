@@ -4,16 +4,16 @@ from rest_access_policy import AccessPolicy
 class CourseAccessPolicy(AccessPolicy):
     statements = [
         {
-            'action': ['destroy', 'update', 'partial_update', 'retrieve'],
-            'principal': 'authenticated',
-            'effect': 'allow',
-            'condition': 'is_instructor'
-        },
-        {
             'action': '*',
             'principal': 'authenticated',
             'effect': 'allow',
             'condition': 'is_staff'
+        },
+        {
+            'action': ['destroy', 'update', 'partial_update', 'retrieve'],
+            'principal': 'authenticated',
+            'effect': 'allow',
+            'condition': 'is_instructor'
         }
     ]
 

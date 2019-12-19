@@ -70,7 +70,7 @@ export class EditAssignment extends Component {
     const isInstructor = this.props.instructorCourses.has(course);
 
     if (!isInstructor || this.state.edited) {
-      return <Redirect to={`/courses/${course}/assignments/${group}`} />;
+      return <Redirect to={`/courses/${course}/assignments/${group}/view`} />;
     }
 
     return (

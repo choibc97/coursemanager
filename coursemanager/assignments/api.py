@@ -74,8 +74,8 @@ class StudentAssignmentViewSet(mixins.RetrieveModelMixin,
         })
 
     def get_object(self):
-        student = self.request.query_params['student']
-        assignment = self.request.query_params['assignment']
+        student = self.request.query_params.get('student')
+        assignment = self.request.query_params.get('assignment')
 
         return StudentAssignment.objects.get(
             student=student, assignment=assignment)

@@ -17,8 +17,7 @@ class AssignmentSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         assignment = super().create(validated_data)
 
-        course = validated_data['course']
-        students = course.students.all()
+        students = assignment.course.students.all()
         for student in students:
             serializer = StudentAssignmentSerializer(data={
                 'assignment': assignment.id,

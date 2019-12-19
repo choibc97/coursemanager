@@ -6,7 +6,6 @@ from invitations.serializers import RegisterInvitationSerializer
 from assignments.serializers import StudentAssignmentSerializer
 
 
-# user serializer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
