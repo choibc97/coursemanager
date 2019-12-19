@@ -7,6 +7,8 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import Breadcrumbs from "../layout/Breadcrumbs";
+
 import { editCourse } from "../../actions/courses";
 
 export class EditCourse extends Component {
@@ -55,6 +57,7 @@ export class EditCourse extends Component {
 
     return (
       <Container>
+        <Breadcrumbs path={this.props.location.pathname} />
         <h2>Edit Course</h2>
         <Form onSubmit={this.onSubmit}>
           <Form.Group>

@@ -7,6 +7,8 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
+import Breadcrumbs from "../layout/Breadcrumbs";
+
 import { editAssignment, getAssignment } from "../../actions/assignments";
 
 export class EditAssignment extends Component {
@@ -42,7 +44,7 @@ export class EditAssignment extends Component {
         initialized: true,
         title: assignment.title,
         points: assignment.points,
-        dueDate: assignment.due_date
+        dueDate: assignment.due_date.slice(0, 16)
       });
     }
   }
@@ -73,6 +75,8 @@ export class EditAssignment extends Component {
 
     return (
       <Container>
+        <Breadcrumbs path={this.props.location.pathname} />
+        <h2>Edit Assignment</h2>
         <Form onSubmit={this.onSubmit}>
           <Form.Group>
             <Form.Label>Title</Form.Label>
