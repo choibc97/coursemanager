@@ -25,6 +25,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         model = User
         fields = ('email',)
 
+    def validate_email(self, value):
+        return value.lower()
+
     def create(self, validated_data):
         user = User.objects.create_user(
             validated_data['email'], is_active=False)
@@ -76,6 +79,9 @@ class TokenRegisterSerializer(serializers.ModelSerializer):
 class LoginSerializer(serializers.Serializer):
     email = serializers.CharField()
     password = serializers.CharField()
+
+    def validate_email(self, value):
+        return value.lower()
 
     def validate(self, data):
         user = authenticate(**data)

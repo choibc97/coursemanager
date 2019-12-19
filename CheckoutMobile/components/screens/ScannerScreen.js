@@ -1,40 +1,19 @@
-import React, { Component } from "react";
-import { SafeAreaView } from "react-native";
-import { Container, Header, Left, Body, Right, Title } from "native-base";
-import { connect } from "react-redux";
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 
-import QRCodeScanner from "react-native-qrcode-scanner";
+import QRCodeScanner from 'react-native-qrcode-scanner';
 
-import { MenuButton, Styles } from "../util";
-import { scan } from "../../actions/checkoutActions";
+export class ScannerScreen extends Component {
+  static propTypes = {};
 
-class ScannerScreen extends Component {
-    onSuccess(e) {
-        this.props.navigation.navigate("Checkout");
-    }
-
-    render() {
-        return (
-            <Container>
-                <Header>
-                    <Left><MenuButton /></Left>
-                    <Body><Title>Scanner</Title></Body>
-                    <Right></Right>
-                </Header>
-                <SafeAreaView style={Styles.safeView}>
-                    <QRCodeScanner
-                        onRead={(e) => this.onSuccess(e)}
-                    />
-                </SafeAreaView>
-            </Container>
-        );
-    }
+  render() {
+    return <></>;
+  }
 }
 
-const mapStateToProps = (state) => ({
-    isPending: state.checkout.isPending,
-    response: state.checkout.response,
-    error: state.checkout.error,
-});
+const mapStateToProps = state => ({});
 
-export default connect(mapStateToProps, { scan })(ScannerScreen);
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ScannerScreen);

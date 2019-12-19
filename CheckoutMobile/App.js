@@ -1,18 +1,12 @@
-import React, { Component } from "react";
-import { createAppContainer } from "react-navigation";
-import { Provider } from "react-redux";
+import React from 'react';
 
-import store from "./store";
+import {Provider} from 'react-redux';
+import store from './store';
 
-import StudentNavigator from "./components/navigators/StudentNavigator";
-import InstructorNavigator from "./components/navigators/InstructorNavigator";
+import 'react-native-gesture-handler';
 
-const AppContainer = createAppContainer(InstructorNavigator);
+const App: () => React$Node = () => {
+  return <Provider store={store}></Provider>;
+};
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}><AppContainer /></Provider>
-    );
-  }
-}
+export default App;
