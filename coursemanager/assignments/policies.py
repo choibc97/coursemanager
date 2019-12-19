@@ -15,7 +15,7 @@ class AssignmentGroupAccessPolicy(AccessPolicy):
             'action': '*',
             'principal': 'authenticated',
             'effect': 'allow',
-            'conditon': 'is_instructor'
+            'condition': 'is_instructor'
         },
         {
             'action': ['list', 'retrieve'],
@@ -84,7 +84,7 @@ class AssignmentAccessPolicy(AccessPolicy):
             'action': '*',
             'principal': 'authenticated',
             'effect': 'allow',
-            'conditon': 'is_instructor'
+            'condition': 'is_instructor'
         },
         {
             'action': ['list', 'retrieve'],
@@ -143,13 +143,13 @@ class StudentAssignmentAccessPolicy(AccessPolicy):
             'action': ['retrieve', 'update', 'partial_update'],
             'principal': 'authenticated',
             'effect': 'allow',
-            'conditon': 'is_instructor'
+            'condition': 'is_staff'
         },
         {
             'action': ['retrieve', 'update', 'partial_update'],
             'principal': 'authenticated',
             'effect': 'allow',
-            'condition': 'is_staff'
+            'condition': 'is_instructor'
         },
         {
             'action': ['retrieve', 'update', 'partial_update'],
