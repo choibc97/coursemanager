@@ -20,7 +20,7 @@ import {
   deleteAssignmentGroup,
   createAssignment
 } from "../../actions/assignments";
-import { timestampToString } from "../../actions/utility";
+import { formatTimeString, localTimeToUtc } from "../../actions/utility";
 
 export class AssignmentGroup extends Component {
   static propTypes = {
@@ -76,7 +76,7 @@ export class AssignmentGroup extends Component {
 
     const { course, group } = this.props.match.params;
     const { title, points } = this.state;
-    const due_date = this.state.dueDate;
+    const due_date = localTimeToUtc(this.state.dueDate);
 
     const assignment = { course, group, title, points, due_date };
     this.props.createAssignment(assignment).then(res => {
@@ -152,7 +152,7 @@ export class AssignmentGroup extends Component {
             />
           </Form.Group>
           <Form.Group as={Col} className="col-auto">
-            <Form.Label>Due Date (in CT)</Form.Label>
+            <Form.Label>Due Date</Form.Label>
             <Form.Control
               onChange={this.onChange}
               type="datetime-local"
@@ -242,7 +242,7 @@ export class AssignmentGroup extends Component {
                     </Link>
                   </Col>
                   <Col className="col-4 mr-auto">
-                    <p>{timestampToString(new Date(assignment.due_date))}</p>
+                    <p>{formatTimeString(assignment.due_date)}</p>
                   </Col>
                   <Col className="col-auto">
                     <p>{assignment.points}</p>

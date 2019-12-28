@@ -31,15 +31,21 @@ class AssignmentSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         old_points = instance.points
-        assignment = super().update(instance, validated_data)
-        new_points = assignment.points
+        old_due_date = instance.due_date
 
-        if old_points != new_points:
+        assignment = super().update(instance, validated_data)
+
+        new_points = assignment.points
+        new_due_date = assignment.due_date
+
+        if old_points != new_points or old_due_date != new_due_date:
             student_assignments = assignment.student_assignments.all()
             for student_assignment in student_assignments:
                 percentage = student_assignment.points_earned / old_points
+                is_late = new_due_date < student_assignment.timestamp
                 serializer = StudentAssignmentSerializer(student_assignment, data={
-                    'points_earned': percentage * new_points
+                    'points_earned': percentage * new_points,
+                    'is_late': is_late
                 }, partial=True)
                 serializer.is_valid(raise_exception=True)
                 serializer.save()

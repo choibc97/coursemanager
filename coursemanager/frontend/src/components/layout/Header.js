@@ -40,7 +40,6 @@ export class Header extends Component {
               {enableCheckout ? (
                 <Nav.Link href="/#/checkout">Checkout</Nav.Link>
               ) : null}
-              <Nav.Link href="/#/about">About</Nav.Link>
             </Nav>
             <Nav>
               <NavDropdown title={`${user.email}`}>

@@ -15,7 +15,7 @@ import ConfirmModal from "../common/ConfirmModal";
 import Breadcrumbs from "../layout/Breadcrumbs";
 
 import { getAssignment, deleteAssignment } from "../../actions/assignments";
-import { timestampToString } from "../../actions/utility";
+import { formatTimeString } from "../../actions/utility";
 
 export class InstructorAssignmentView extends Component {
   static propTypes = {
@@ -132,7 +132,7 @@ export class InstructorAssignmentView extends Component {
         <Row>
           <Col>
             <h4 className="text-danger">
-              Due: {timestampToString(new Date(this.props.assignment.due_date))}
+              Due: {formatTimeString(this.props.assignment.due_date)}
             </h4>
           </Col>
         </Row>

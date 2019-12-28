@@ -44,14 +44,34 @@ export const makePathString = (pathArray, i) => {
   }
 };
 
-// make string from timestamp
-export const timestampToString = timestamp => {
-  const month = timestamp.getUTCMonth() + 1;
-  const date = timestamp.getUTCDate();
-  const hours = timestamp.getUTCHours();
-  const minutes = timestamp.getUTCMinutes();
+// converts timeString into desired display format
+// handles conversion of UTC to local timezone automatically
+export const formatTimeString = timeString => {
+  const timestamp = new Date(timeString);
 
-  return `${month}/${date} @ ${hours}:${minutes} CT`;
+  const month = timestamp.getMonth() + 1;
+  const date = timestamp.getDate();
+  const hours = timestamp.getHours();
+  const minutes = timestamp.getMinutes();
+
+  return `${month}/${date} @ ${hours}:${minutes}`;
+};
+
+// converts a given timeString into UTC format
+export const localTimeToUtc = timeString => {
+  return new Date(timeString).toISOString();
+};
+
+export const utcToLocalTime = timeString => {
+  const timestamp = new Date(timeString);
+
+  const year = timestamp.getFullYear();
+  const month = timestamp.getMonth() + 1;
+  const date = timestamp.getDate();
+  const hours = timestamp.getHours();
+  const minutes = timestamp.getMinutes();
+
+  return `${year}-${month}-${date}T${hours}:${minutes}`;
 };
 
 // sort 2 courses by their course id

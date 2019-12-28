@@ -11,7 +11,7 @@ import Loader from "../common/Loader";
 import Breadcrumbs from "../layout/Breadcrumbs";
 
 import { getStudentAssignment } from "../../actions/assignments";
-import { timestampToString } from "../../actions/utility";
+import { formatTimeString } from "../../actions/utility";
 
 export class StudentAssignmentView extends Component {
   static propTypes = {
@@ -69,7 +69,7 @@ export class StudentAssignmentView extends Component {
         <Row>
           <Col>
             <h4 className="text-danger">
-              Due: {timestampToString(new Date(assignment.due_date))}
+              Due: {formatTimeString(assignment.due_date)}
             </h4>
           </Col>
         </Row>
@@ -117,14 +117,17 @@ export class StudentAssignmentView extends Component {
                   <Col>
                     <p>{`Graded by ${
                       studentAssignment.grader
-                    } at ${timestampToString(
-                      new Date(studentAssignment.timestamp)
-                    )}`}</p>
+                    } at ${formatTimeString(studentAssignment.timestamp)}`}</p>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
-                    <p>Comments: {studentAssignment.comment}</p>
+                    <p>
+                      Comments:{" "}
+                      {studentAssignment.comment
+                        ? studentAssignment.comment
+                        : "N/A"}
+                    </p>
                   </Col>
                 </Row>
               </Fragment>

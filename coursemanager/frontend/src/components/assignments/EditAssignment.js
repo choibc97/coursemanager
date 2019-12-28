@@ -10,6 +10,7 @@ import Button from "react-bootstrap/Button";
 import Breadcrumbs from "../layout/Breadcrumbs";
 
 import { editAssignment, getAssignment } from "../../actions/assignments";
+import { localTimeToUtc, utcToLocalTime } from "../../actions/utility";
 
 export class EditAssignment extends Component {
   static propTypes = {
@@ -44,7 +45,7 @@ export class EditAssignment extends Component {
         initialized: true,
         title: assignment.title,
         points: assignment.points,
-        dueDate: assignment.due_date.slice(0, 16)
+        dueDate: utcToLocalTime(assignment.due_date)
       });
     }
   }
@@ -58,7 +59,7 @@ export class EditAssignment extends Component {
 
     const id = this.props.assignment.id;
     const { title, points } = this.state;
-    const due_date = this.state.dueDate;
+    const due_date = localTimeToUtc(this.state.dueDate);
     const assignment = { id, title, points, due_date };
     this.props.editAssignment(assignment).then(res => {
       this.setState({ edited: res });
@@ -101,7 +102,7 @@ export class EditAssignment extends Component {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Due Date (in CT)</Form.Label>
+            <Form.Label>Due Date</Form.Label>
             <Form.Control
               onChange={this.onChange}
               type="datetime-local"
