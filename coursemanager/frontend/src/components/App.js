@@ -14,7 +14,6 @@ import PrivateRoute from "./common/PrivateRoute";
 
 // home stuff
 import Home from "./home/Home";
-import About from "./home/About";
 
 // accounts stuff
 import Login from "./accounts/Login";
@@ -64,7 +63,6 @@ class App extends Component {
                 <Switch>
                   {/* home stuff */}
                   <Route exact path="/" component={Home} />
-                  <Route exact path="/about" component={About} />
 
                   {/* auth stuff */}
                   <Route exact path="/login" component={Login} />
