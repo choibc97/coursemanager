@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 import Loader from "../common/Loader";
 
@@ -56,60 +56,56 @@ export class Courses extends Component {
             </Col>
           </Row>
         ) : (
-          <ListGroup>
-            <ListGroup.Item>
-              <Row>
-                <Col className="col-auto mr-auto">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>
                   <h4 className="text-info">Course</h4>
-                </Col>
-                <Col className="col-auto">
+                </th>
+                <th>
                   <h4 className="text-info">Role</h4>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {instructorCourses.map(course => (
-              <ListGroup.Item key={course.id}>
-                <Row>
-                  <Col className="col-auto mr-auto">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {instructorCourses.map(course => (
+                <tr key={course.id}>
+                  <td>
                     <Link to={`/courses/${course.id}/view`}>
                       <p>{`${course.course_id}: ${course.title}`}</p>
                     </Link>
-                  </Col>
-                  <Col className="col-auto">
+                  </td>
+                  <td>
                     <p>Instructor</p>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-            {taCourses.map(course => (
-              <ListGroup.Item key={course.id}>
-                <Row>
-                  <Col className="col-auto mr-auto">
+                  </td>
+                </tr>
+              ))}
+              {taCourses.map(course => (
+                <tr key={course.id}>
+                  <td>
                     <Link to={`/courses/${course.id}/view`}>
                       <p>{`${course.course_id}: ${course.title}`}</p>
                     </Link>
-                  </Col>
-                  <Col className="col-auto">
+                  </td>
+                  <td>
                     <p>TA</p>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-            {studentCourses.map(course => (
-              <ListGroup.Item key={course.id}>
-                <Row>
-                  <Col className="col-auto mr-auto">
+                  </td>
+                </tr>
+              ))}
+              {studentCourses.map(course => (
+                <tr key={course.id}>
+                  <td>
                     <Link to={`/courses/${course.id}/view`}>
                       <p>{`${course.course_id}: ${course.title}`}</p>
                     </Link>
-                  </Col>
-                  <Col className="col-auto">
+                  </td>
+                  <td>
                     <p>Student</p>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         )}
       </Container>
     );

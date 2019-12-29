@@ -8,7 +8,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 import {
   createAssignmentGroup,
@@ -93,15 +93,11 @@ export class CourseAssignments extends Component {
 
     return (
       <Container className="mt-3">
-        <Row>
-          <Col>
-            {isInstructor ? (
-              <Row>
-                <Col>{addForm}</Col>
-              </Row>
-            ) : null}
-          </Col>
-        </Row>
+        {isInstructor ? (
+          <Row>
+            <Col>{addForm}</Col>
+          </Row>
+        ) : null}
         {this.props.assignmentGroups.length === 0 ? (
           <Row>
             <Col>
@@ -109,34 +105,34 @@ export class CourseAssignments extends Component {
             </Col>
           </Row>
         ) : (
-          <ListGroup>
-            <ListGroup.Item>
-              <Row>
-                <Col className="col-auto mr-auto">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>
                   <h4 className="text-info">Assignment Group</h4>
-                </Col>
-                <Col className="col-auto">
+                </th>
+                <th>
                   <h4 className="text-info">Total Points</h4>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {this.props.assignmentGroups.map(group => (
-              <ListGroup.Item key={group.id}>
-                <Row>
-                  <Col className="col-auto mr-auto">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.assignmentGroups.map(group => (
+                <tr key={group.id}>
+                  <td>
                     <Link
                       to={`/courses/${this.props.course.id}/assignments/${group.id}/view`}
                     >
                       <p>{group.title}</p>
                     </Link>
-                  </Col>
-                  <Col className="col-auto">
+                  </td>
+                  <td>
                     <p>{group.points}</p>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         )}
       </Container>
     );

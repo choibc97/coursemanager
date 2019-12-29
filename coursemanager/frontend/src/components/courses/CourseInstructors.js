@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 import { editCourse } from "../../actions/courses";
 
@@ -81,32 +81,32 @@ export class CourseInstructors extends Component {
             </Col>
           </Row>
         ) : (
-          <ListGroup>
-            <ListGroup.Item>
-              <Row>
-                <Col className="col-auto mr-auto">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>
                   <h4 className="text-info">Name</h4>
-                </Col>
-                <Col className="col-auto">
+                </th>
+                <th>
                   <h4 className="text-info">Email</h4>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {this.props.course.instructors.map(instructor => (
-              <ListGroup.Item key={instructor.email}>
-                <Row>
-                  <Col className="col-auto mr-auto">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.course.instructors.map(instructor => (
+                <tr key={instructor.email}>
+                  <td>
                     <p>{`${instructor.first_name} ${instructor.last_name}`}</p>
-                  </Col>
-                  <Col className="col-auto">
+                  </td>
+                  <td>
                     <a href={`mailto:${instructor.email}`}>
                       <p>{instructor.email}</p>
                     </a>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         )}
       </Container>
     );

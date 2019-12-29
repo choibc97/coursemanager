@@ -61,75 +61,38 @@ export class StudentAssignmentView extends Component {
             <h2>{`${course.course_id}: ${assignment.title}`}</h2>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <h4 className="text-warning">Points: {assignment.points}</h4>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h4 className="text-danger">
-              Due: {formatTimeString(assignment.due_date)}
-            </h4>
-          </Col>
-        </Row>
+        <h4 className="text-warning">Points: {assignment.points}</h4>
+        <h4 className="text-danger">
+          Due: {formatTimeString(assignment.due_date)}
+        </h4>
         <Row className="align-items-center">
           <Col>
             <QRCode value={this.props.studentAssignment.qr_code} size={256} />
           </Col>
           <Col>
-            <Row>
-              <Col>
-                <p className="text-info">
-                  QR code as string: {studentAssignment.qr_code}
-                </p>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <p>{`${this.props.user.first_name} ${this.props.user.last_name}: ${this.props.user.email}`}</p>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <p>
-                  Completed:{" "}
-                  {this.props.studentAssignment.completed ? "Yes" : "No"}
-                </p>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <p>
-                  Points earned: {studentAssignment.points_earned} /{" "}
-                  {assignment.points}
-                </p>
-              </Col>
-            </Row>
+            <p className="text-info">
+              QR code as string: {studentAssignment.qr_code}
+            </p>
+            <p>{`${this.props.user.first_name} ${this.props.user.last_name}: ${this.props.user.email}`}</p>
+            <p>
+              Completed: {this.props.studentAssignment.completed ? "Yes" : "No"}
+            </p>
+            <p>
+              Points earned: {studentAssignment.points_earned} /{" "}
+              {assignment.points}
+            </p>
             {studentAssignment.grader ? (
               <Fragment>
-                <Row>
-                  <Col>
-                    <p>Late: {studentAssignment.is_late ? "Yes" : "No"}</p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <p>{`Graded by ${
-                      studentAssignment.grader
-                    } at ${formatTimeString(studentAssignment.timestamp)}`}</p>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <p>
-                      Comments:{" "}
-                      {studentAssignment.comment
-                        ? studentAssignment.comment
-                        : "N/A"}
-                    </p>
-                  </Col>
-                </Row>
+                <p>Late: {studentAssignment.is_late ? "Yes" : "No"}</p>
+                <p>{`Graded by ${
+                  studentAssignment.grader
+                } at ${formatTimeString(studentAssignment.timestamp)}`}</p>
+                <p>
+                  Comments:{" "}
+                  {studentAssignment.comment
+                    ? studentAssignment.comment
+                    : "N/A"}
+                </p>
               </Fragment>
             ) : null}
           </Col>

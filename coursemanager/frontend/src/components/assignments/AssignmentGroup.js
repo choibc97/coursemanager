@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 import Loader from "../common/Loader";
 import ConfirmModal from "../common/ConfirmModal";
@@ -196,13 +196,9 @@ export class AssignmentGroup extends Component {
             </Col>
           ) : null}
         </Row>
-        <Row>
-          <Col>
-            <h4 className="text-warning">
-              Total Points: {this.props.assignmentGroup.points}
-            </h4>
-          </Col>
-        </Row>
+        <h4 className="text-warning">
+          Total Points: {this.props.assignmentGroup.points}
+        </h4>
         <Row>
           <Col>{isInstructor ? addForm : null}</Col>
         </Row>
@@ -213,24 +209,24 @@ export class AssignmentGroup extends Component {
             </Col>
           </Row>
         ) : (
-          <ListGroup>
-            <ListGroup.Item>
-              <Row>
-                <Col className="col-4">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>
                   <h4 className="text-info">Assignment</h4>
-                </Col>
-                <Col className="col-4 mr-auto">
+                </th>
+                <th>
                   <h4 className="text-info">Due Date</h4>
-                </Col>
-                <Col className="col-auto">
+                </th>
+                <th>
                   <h4 className="text-info">Points</h4>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {this.props.assignments.map(assignment => (
-              <ListGroup.Item key={assignment.id}>
-                <Row key={assignment.id}>
-                  <Col className="col-4">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.assignments.map(assignment => (
+                <tr key={assignment.id}>
+                  <td>
                     <Link
                       to={
                         isStudent
@@ -240,17 +236,17 @@ export class AssignmentGroup extends Component {
                     >
                       <p>{assignment.title}</p>
                     </Link>
-                  </Col>
-                  <Col className="col-4 mr-auto">
+                  </td>
+                  <td>
                     <p>{formatTimeString(assignment.due_date)}</p>
-                  </Col>
-                  <Col className="col-auto">
+                  </td>
+                  <td>
                     <p>{assignment.points}</p>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         )}
       </Container>
     );

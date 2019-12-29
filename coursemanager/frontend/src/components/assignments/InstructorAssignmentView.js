@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-import ListGroup from "react-bootstrap/ListGroup";
+import Table from "react-bootstrap/Table";
 
 import Loader from "../common/Loader";
 import ConfirmModal from "../common/ConfirmModal";
@@ -122,20 +122,10 @@ export class InstructorAssignmentView extends Component {
             </Col>
           ) : null}
         </Row>
-        <Row>
-          <Col>
-            <h4 className="text-warning">
-              Points: {this.props.assignment.points}
-            </h4>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <h4 className="text-danger">
-              Due: {formatTimeString(this.props.assignment.due_date)}
-            </h4>
-          </Col>
-        </Row>
+        <h4 className="text-warning">Points: {this.props.assignment.points}</h4>
+        <h4 className="text-danger">
+          Due: {formatTimeString(this.props.assignment.due_date)}
+        </h4>
         {this.props.studentAssignments.length === 0 ? (
           <Row>
             <Col>
@@ -143,52 +133,52 @@ export class InstructorAssignmentView extends Component {
             </Col>
           </Row>
         ) : (
-          <ListGroup>
-            <ListGroup.Item>
-              <Row>
-                <Col className="col-3">
+          <Table responsive>
+            <thead>
+              <tr>
+                <th>
                   <p className="text-info">Student</p>
-                </Col>
-                <Col className="col-3">
+                </th>
+                <th>
                   <p className="text-info">Grader</p>
-                </Col>
-                <Col className="col-2">
+                </th>
+                <th>
                   <p className="text-info">Completed</p>
-                </Col>
-                <Col className="col-2">
+                </th>
+                <th>
                   <p className="text-info">Late</p>
-                </Col>
-                <Col className="col-2">
+                </th>
+                <th>
                   <p className="text-info">Points Earned</p>
-                </Col>
-              </Row>
-            </ListGroup.Item>
-            {this.props.studentAssignments.map(studentAssignment => (
-              <ListGroup.Item key={studentAssignment.id}>
-                <Row>
-                  <Col className="col-3">
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.studentAssignments.map(studentAssignment => (
+                <tr key={studentAssignment.id}>
+                  <td>
                     <p>{studentAssignment.student}</p>
-                  </Col>
-                  <Col className="col-3">
+                  </td>
+                  <td>
                     <p>
                       {studentAssignment.grader
                         ? studentAssignment.grader
                         : "N/A"}
                     </p>
-                  </Col>
-                  <Col className="col-2">
+                  </td>
+                  <td>
                     <p>{studentAssignment.completed ? "Yes" : "No"}</p>
-                  </Col>
-                  <Col className="col-2">
+                  </td>
+                  <td>
                     <p>{studentAssignment.is_late ? "Yes" : "No"}</p>
-                  </Col>
-                  <Col className="col-2">
+                  </td>
+                  <td>
                     <p>{studentAssignment.points_earned}</p>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-          </ListGroup>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
         )}
       </Container>
     );
