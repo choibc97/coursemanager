@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'masters.benjaminchoi.com']
+# DOMAIN and SERVER_IP_ADDRESS from secrets.py
+ALLOWED_HOSTS = ['localhost', DOMAIN, SERVER_IP_ADDRESS]
 
 
 # Application definition
@@ -64,7 +65,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'wustlcoursemanager@gmail.com'
+# EMAIL_HOST_USER is stored in secrets.py
 # EMAIL_HOST_PASSWORD is stored in secrets.py
 
 # end custom settings

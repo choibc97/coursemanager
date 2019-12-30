@@ -1,0 +1,17 @@
+[Unit]
+Description=gunicorn daemon
+Requires=coursemanager-gunicorn.socket
+After=network.target
+
+[Service]
+User=user
+Group=www-data
+WorkingDirectory=path
+ExecStart=env_gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/coursemanager-gunicorn.sock \
+          coursemanager.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
