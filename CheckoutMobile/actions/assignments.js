@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {DOMAIN} from './domain';
 import {returnErrors, createMessage} from './messages';
 import {tokenConfig} from './auth';
 import {GET_STUDENT_ASSIGNMENT, EDIT_STUDENT_ASSIGNMENT} from './types';
@@ -10,7 +11,7 @@ export const getStudentAssignment = (student, assignment) => (
 ) => {
   return axios
     .get(
-      'http://masters.benjaminchoi.com/api/student_assignments',
+      `${DOMAIN}/api/student_assignments`,
       addStudentAndAssignmentToConfig(
         tokenConfig(getState),
         student,
@@ -38,7 +39,7 @@ export const editStudentAssignment = (
 ) => (dispatch, getState) => {
   return axios
     .patch(
-      'http://masters.benjaminchoi.com/api/student_assignments',
+      `${DOMAIN}/api/student_assignments`,
       studentAssignment,
       addStudentAndAssignmentToConfig(
         tokenConfig(getState),

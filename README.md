@@ -42,7 +42,9 @@ Keep the following in mind when running the setup script:
 
 ### React Native setup
 
-Any work with the React Native portion of the repo (anything under `CheckoutMobile`) should be done locally. In order to get started, check [these docs](https://facebook.github.io/react-native/docs/getting-started).
+Any work with the React Native portion of the repo (anything under `CheckoutMobile`) should be done locally. Before doing anything else, you will need to tell the app where to make requests by pointing it to your domain. To do so, navigate to `CheckoutMobile/actions` and create a new file `domain.js`. Under this file, append the following line: `export const DOMAIN = '{DOMAIN}';`, making sure to replace `{DOMAIN}` with your domain. As an example, for the demo of this project, the line should look like this: `export const DOMAIN = 'http://masters.benjaminchoi.com';`.
+
+After that, check [these docs](https://facebook.github.io/react-native/docs/getting-started) to continue.
 
 Keep the following in mind while going through the docs:
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {DOMAIN} from './domain';
 import {returnErrors, createMessage} from './messages';
 import {
   USER_LOADED,
@@ -21,10 +22,7 @@ export const loadUser = () => (dispatch, getState) => {
     })
     .finally(() => {
       axios
-        .get(
-          'http://masters.benjaminchoi.com/api/auth/user',
-          tokenConfig(getState),
-        )
+        .get(`${DOMAIN}/api/auth/user`, tokenConfig(getState))
         .then(res => {
           dispatch({
             type: USER_LOADED,
@@ -52,7 +50,7 @@ export const login = (email, password) => dispatch => {
   const body = JSON.stringify({email, password});
 
   axios
-    .post('http://masters.benjaminchoi.com/api/auth/login', body, config)
+    .post(`${DOMAIN}/api/auth/login`, body, config)
     .then(res => {
       dispatch({
         type: LOGIN_SUCCESS,
@@ -71,11 +69,7 @@ export const login = (email, password) => dispatch => {
 // logout user
 export const logout = () => (dispatch, getState) => {
   axios
-    .post(
-      'http://masters.benjaminchoi.com/api/auth/logout',
-      null,
-      tokenConfig(getState),
-    )
+    .post(`${DOMAIN}/api/auth/logout`, null, tokenConfig(getState))
     .then(res => {
       dispatch({
         type: LOGOUT_SUCCESS,
