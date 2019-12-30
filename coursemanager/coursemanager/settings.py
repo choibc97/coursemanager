@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'coursemanager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'masters',
+        'NAME': 'coursemanager',
         'USER': 'django',
         'PASSWORD': POSTGRES_PASSWORD,  # from secrets.py
         'HOST': 'localhost',
