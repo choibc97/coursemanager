@@ -17,7 +17,7 @@
 
 ## About
 
-This project was created to be [choibc97's](https://github.com/choibc97) Master's Project (WUSTL 2019). The project is made up of 3 components: a Django backend, a React web frontend, and a React Native cross-platform mobile frontend. The frontend communicates with the backend using a REST API created with the Django Rest Framework (DRF). The `CheckoutMobile` directory contains all of the code related to the mobile frontend, while the `coursemanager` directory contains all of the code related to the backend and web frontend. All of the web frontend code can be found under `coursemanager/frontend`. Currently, a demo of this project is hosted on masters.benjaminchoi.com.
+This project was created to be [choibc97's](https://github.com/choibc97) Master's Project (WUSTL 2019). The project is made up of 3 components: a Django backend, a React web frontend, and a React Native cross-platform mobile frontend. The frontend communicates with the backend using a REST API created with the Django Rest Framework (DRF). The `CheckoutMobile` directory contains all of the code related to the mobile frontend, while the `coursemanager` directory contains all of the code related to the backend and web frontend. All of the web frontend code can be found under `coursemanager/frontend`. Currently, a demo of this project is hosted on http://masters.benjaminchoi.com.
 
 ## Setup
 
@@ -25,8 +25,8 @@ This project was created to be [choibc97's](https://github.com/choibc97) Master'
 
 Before setting up this project, you will need:
 
-1. Server space (e.g. AWS, DigitalOcean, etc.)
-2. A domain (namecheap.com, domains.google.com, etc.)
+1. Server space (e.g. [AWS](https://aws.amazon.com/), [DigitalOcean](https://www.digitalocean.com/), etc.)
+2. A domain ([namecheap](https://www.namecheap.com/), [Google Domains](https://domains.google.com/), etc.)
 
 Once you have server space and a domain available, you must link your domain to your server. In order to do so, follow [this DigitalOcean guide](https://www.digitalocean.com/docs/networking/dns/quickstart/) or search for an equivalent guide for your cloud service provider of choice.
 
@@ -110,6 +110,6 @@ As mentioned previously, you should only make changes to the React Native portio
 
 ## Some resources I used
 
-- Creating a custom user model: <https://testdriven.io/blog/django-custom-user-model/>
-- Sending emails with django: <https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e>
-- Password validation with DRF: <https://stackoverflow.com/questions/36414804/integrate-django-password-validators-with-django-rest-framework-validate-passwor>
+- [Creating a custom user model](https://testdriven.io/blog/django-custom-user-model/)
+- [Sending emails with django](https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e)
+- [Password validation with DRF](https://stackoverflow.com/questions/36414804/integrate-django-password-validators-with-django-rest-framework-validate-passwor)
