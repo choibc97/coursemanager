@@ -58,8 +58,10 @@ sudo sed -i "s,User=user,User=${USER}," /etc/systemd/system/coursemanager-gunico
 path=$(pwd)
 sudo sed -i "s,WorkingDirectory=path,WorkingDirectory=${path}/coursemanager," /etc/systemd/system/coursemanager-gunicorn.service
 sudo sed -i "s,ExecStart=env_gunicorn,ExecStart=${path}/env/bin/gunicorn," /etc/systemd/system/coursemanager-gunicorn.service
+sudo systemctl start coursemanager-gunicorn.socket
+sudo systemctl enable coursemanager-gunicorn.socket
 sudo systemctl daemon-reload
-sudo systemctl restart gunicorn
+sudo systemctl restart coursemanager-gunicorn
 
 # setup nginx
 sudo cp nginx.txt /etc/nginx/sites-available/coursemanager
