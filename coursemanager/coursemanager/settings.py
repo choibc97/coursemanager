@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .secrets import *
+from .secrets import (
+    SECRET_KEY, DOMAIN, SERVER_IP_ADDRESS,
+    EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, POSTGRES_PASSWORD
+)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
